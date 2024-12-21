@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Photon.Pun;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
-    [SerializeField] private Transform cam;
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
-    [SerializeField] private float gravity = -9.81f; 
+    [SerializeField] private float gravity = -9.81f;
+    public PhotonView view;
     private Vector3 velocity;
     private float turnSmoothVelocity;
 
@@ -29,8 +30,8 @@ public class Player : MonoBehaviour
 
         isWalking = direction != Vector3.zero;
         
-        if (direction.magnitude >= 0.1f) {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        if (direction.magnitude >= 0.1f && view.IsMine) {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 

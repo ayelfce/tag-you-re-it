@@ -1,15 +1,4 @@
-Library/Bee/artifacts/mvdfrm/Unity.Burst.Editor.ref.dll_EA1A6D1CB62C8BFD.mvfrm
-Library/Bee/artifacts/mvdfrm/Unity.Burst.ref.dll_A43E80D48102A6F4.mvfrm
-Library/Bee/artifacts/mvdfrm/Unity.Collections.ref.dll_CB2B1FA2A63FF8D9.mvfrm
 Library/Bee/artifacts/mvdfrm/Unity.EditorCoroutines.Editor.ref.dll_728C78151872B5E7.mvfrm
-Library/Bee/artifacts/mvdfrm/Unity.Mathematics.Editor.ref.dll_4A3A50F3774BA9F7.mvfrm
-Library/Bee/artifacts/mvdfrm/Unity.Mathematics.ref.dll_4EAD86AD4C1B715A.mvfrm
-Library/Bee/artifacts/mvdfrm/Unity.Netcode.Components.ref.dll_7E3319C09445850C.mvfrm
-Library/Bee/artifacts/mvdfrm/Unity.Netcode.Editor.PackageChecker.ref.dll_6607449519F57970.mvfrm
-Library/Bee/artifacts/mvdfrm/Unity.Netcode.Editor.ref.dll_25FCC801F4B380F3.mvfrm
-Library/Bee/artifacts/mvdfrm/Unity.Netcode.Runtime.ref.dll_E1EB769D250B9488.mvfrm
-Library/Bee/artifacts/mvdfrm/Unity.Networking.Editor.ref.dll_3D3F4A981531E84B.mvfrm
-Library/Bee/artifacts/mvdfrm/Unity.Networking.Transport.ref.dll_6736858869D91E61.mvfrm
 Library/Bee/artifacts/mvdfrm/Unity.Performance.Profile-Analyzer.Editor.ref.dll_C3EE3B81D8CE5737.mvfrm
 Library/Bee/artifacts/mvdfrm/Unity.PlasticSCM.Editor.ref.dll_CBF917C274624EE2.mvfrm
 Library/Bee/artifacts/mvdfrm/Unity.Rider.Editor.ref.dll_A276D0F1D4D046E3.mvfrm
@@ -116,5 +105,4 @@ Library/Bee/artifacts/mvdfrm/UnityEngine.VRModule.dll_3F11D134CAA12BB4.mvfrm
 Library/Bee/artifacts/mvdfrm/UnityEngine.WindModule.dll_3EE95BC340509B50.mvfrm
 Library/Bee/artifacts/mvdfrm/UnityEngine.XRModule.dll_71D0943953DB7912.mvfrm
 Library/Bee/artifacts/mvdfrm/UnityEditor.iOS.Extensions.Xcode.dll_1DF9BB09260FAAE2.mvfrm
-Library/Bee/artifacts/mvdfrm/Unity.Collections.LowLevel.ILSupport.dll_2E40CE80E145E521.mvfrm
 Library/Bee/artifacts/mvdfrm/Unity.VisualScripting.Antlr3.Runtime.dll_FBC62C826EB2B4B0.mvfrm
