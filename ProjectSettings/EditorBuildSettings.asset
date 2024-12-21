@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/UIWelcomeScene.unity
     guid: 0f4298753f709b545a5495334ba678e0
   - enabled: 1
+    path: Assets/Scenes/LobbyScene.unity
+    guid: 9388482c47b9cd641b75c4a3b4126b16
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 5e7af4bd95ac53a4cb784a9eedf8f6f9
   m_configObjects: {}
