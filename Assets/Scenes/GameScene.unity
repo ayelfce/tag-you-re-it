@@ -3995,9 +3995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2e02a7307804dcfad2c6b4cebbcc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownText: {fileID: 32765165}
-  players: []
-  blackScreenPanel: {fileID: 518724240}
+  Player: {fileID: 0}
 --- !u!1001 &584414550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9529,7 +9527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1754758058
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,12 +15,6 @@ public class Player : MonoBehaviour
     private float turnSmoothVelocity;
 
     private bool isWalking;
-
-    private void Start() {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     private void Update() {
         
         float horizontal = Input.GetAxisRaw("Horizontal");

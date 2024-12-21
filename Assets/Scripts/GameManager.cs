@@ -22,110 +22,132 @@
 //         // Dont destroy on reloading the scene
 //         DontDestroyOnLoad(gameObject);
 
- 
+
 //     }
 //     public Player Player;
-    
+
 // }
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using TMPro;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    public static GameManager Instance;
+    public static GameManager Instance = null; // Singleton
+    private const string RoleProperty = "Role"; // Custom property anahtarı
+    private const string EBE = "Ebe";
+    private const string HIDING = "Hiding";
 
-    public TextMeshProUGUI countdownText;
-    public GameObject[] players;
-    public GameObject blackScreenPanel; // Ebe'nin ekranını karartacak panel
-    private bool isEbe = false;
-    private float countdownTime = 10f;
-
-    private CharacterController ebeController;
-
-    private void Awake()
+    void Awake()
     {
-        // Singleton pattern
         if (Instance == null)
         {
             Instance = this;
         }
-        else
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
+
+        DontDestroyOnLoad(gameObject); // Sahneler arası geçişte korunur
     }
 
-    private void Start()
+    void Start()
     {
+        // Sadece MasterClient rolleri belirler
         if (PhotonNetwork.IsMasterClient)
         {
-            // Ebe'yi rastgele seç
-            int randomIndex = Random.Range(0, PhotonNetwork.PlayerList.Length);
-            PhotonView playerView = PhotonNetwork.PlayerList[randomIndex].TagObject as PhotonView;
-            playerView.RPC("SetEbe", RpcTarget.All, true);  // Ebe'yi tüm oyunculara bildir
+            AssignRoles();
         }
     }
 
-    [PunRPC]
-    public void SetEbe(bool isEbePlayer)
+    private void AssignRoles()
     {
-        isEbe = isEbePlayer;
+        // Tüm oyuncuları al
+        Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
 
-        if (isEbe)
+        // Rastgele bir ebe seç
+        int randomIndex = Random.Range(0, players.Length);
+        players[randomIndex].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { RoleProperty, EBE } });
+
+        // Diğer oyuncuları saklanan yap
+        for (int i = 0; i < players.Length; i++)
         {
-            // Ebe'nin hareketini engelle
-            ebeController = GetComponent<CharacterController>();
-            StartCoroutine(StartCountdown());
-        }
-        else
-        {
-            // Diğer oyuncular için saklanma mekaniğini başlat
-            ShowHidePlayers(true);
-        }
-    }
-
-    private void ShowHidePlayers(bool show)
-    {
-        foreach (var player in players)
-        {
-            player.SetActive(show);
-        }
-    }
-
-    private IEnumerator StartCountdown()
-    {
-        // Ebe'nin ekranını karart
-        blackScreenPanel.SetActive(true);
-        countdownText.gameObject.SetActive(true);
-
-        // Ebe'nin hareketini engelle
-        while (countdownTime > 0)
-        {
-            countdownText.text = "Ebe sensin! " + Mathf.Ceil(countdownTime) + " saniye kaldı!";
-            countdownTime -= Time.deltaTime;
-
-            // Ebe hareket etmeye çalıştığında engelle
-            if (ebeController != null)
+            if (i != randomIndex)
             {
-                ebeController.Move(Vector3.zero); // Hareketi sıfırla
+                players[i].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { RoleProperty, HIDING } });
             }
-
-            yield return null;
         }
-
-        // Geri sayım bitince, normal oyun başlasın
-        countdownText.gameObject.SetActive(false);
-        blackScreenPanel.SetActive(false);  // Ekranı normale döndür
-
-        // Ebe'nin hareketine izin ver
-        ShowHidePlayers(true);  // Diğer oyuncuları görünür yap
     }
 
-    public override void OnJoinedRoom()
+    // Doğru imza
+    public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        if (changedProps.ContainsKey(RoleProperty))
+        {
+            string role = (string)changedProps[RoleProperty];
+            Debug.Log($"Player {targetPlayer.NickName} is assigned as {role}");
+        }
+    }
+
+    public string GetPlayerRole(Photon.Realtime.Player player)
+    {
+        if (player.CustomProperties.TryGetValue(RoleProperty, out object role))
+        {
+            return (string)role;
+        }
+        return null;
     }
 }
+
+// using UnityEngine;
+// using Photon.Pun;
+// using TMPro;
+// using System.Collections;
+
+// public class GameManager : MonoBehaviourPunCallbacks
+// {
+//     public TextMeshProUGUI countdownText;
+//     public GameObject blackScreenPanel;
+//     private bool isEbe = false;
+//     private float countdownTime = 10f;
+
+//     private void Start()
+//     {
+//         if (PhotonNetwork.IsMasterClient)
+//         {
+//             int randomIndex = Random.Range(0, PhotonNetwork.PlayerList.Length);
+//             Photon.Realtime.Player selectedPlayer = PhotonNetwork.PlayerList[randomIndex];
+
+//             photonView.RPC("SetEbe", RpcTarget.All, selectedPlayer.NickName);
+//         }
+//     }
+
+//     [PunRPC]
+//     public void SetEbe(string ebeName)
+//     {
+//         if (PhotonNetwork.NickName == ebeName)
+//         {
+//             isEbe = true;
+//             StartCoroutine(StartCountdown());
+//         }
+//     }
+
+//     private IEnumerator StartCountdown()
+//     {
+//         blackScreenPanel.SetActive(true);
+//         countdownText.gameObject.SetActive(true);
+
+//         while (countdownTime > 0)
+//         {
+//             countdownText.text = "Ebe sensin! " + Mathf.Ceil(countdownTime) + " saniye kaldı!";
+//             countdownTime -= Time.deltaTime;
+//             yield return null;
+//         }
+
+//         countdownText.gameObject.SetActive(false);
+//         blackScreenPanel.SetActive(false);
+//     }
+// }
