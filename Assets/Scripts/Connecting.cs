@@ -13,7 +13,7 @@ public class Connecting : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster() {
         Debug.Log("Connected");
-        SceneManager.LoadScene("UIWelcomeScene");
+        SceneManager.LoadScene("MainMenu");
     }
 
 }

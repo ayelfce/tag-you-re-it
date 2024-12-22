@@ -53,48 +53,23 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             ShowWarning("Bağlantı hatası!");
         }
+
+        //PhotonNetwork.LoadLevel("LobbyScene");
     }
 
-    public void JoinButton()
-    {
-        // Kullanıcı adı ve oda adı kontrolü
-        if (string.IsNullOrWhiteSpace(username.text))
-        {
-            ShowWarning("Kullanıcı adı boş olamaz!");
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(roomName.text))
-        {
-            ShowWarning("Lütfen bir oda adı girin.");
-            return;
-        }
-
-        // Kullanıcı adı ayarla
-        PhotonNetwork.NickName = username.text;
-
-        // Odaya katılma
-        if (PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.JoinRoom(roomName.text);
-        }
-        else
-        {
-            ShowWarning("Bağlantı Hatası!");
-        }
-    }
 
     public override void OnConnectedToMaster()
     {
         // Master Server'a başarıyla bağlandı
         Debug.Log("Connected.");
     }
-
     public override void OnJoinedRoom()
     {
-        // Odaya başarıyla katıldığında LobbyScene sahnesine geçiş
-        PhotonNetwork.LoadLevel("LobbyScene");  // Odaya katıldığında LobbyScene sahnesine yönlendirilir
+        // Odaya başarıyla katıldığınızda bu metot çağrılır
+        Debug.Log("Odaya katıldım: " + PhotonNetwork.CurrentRoom.Name);
+        PhotonNetwork.LoadLevel("LobbyScene");
     }
+
 
     private void ShowWarning(string message)
     {
