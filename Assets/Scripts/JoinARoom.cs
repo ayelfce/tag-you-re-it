@@ -15,7 +15,6 @@ public class JoinARoom : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        // Eðer baðlanmamýþsak, baðlanmaya çalýþ
         if (!PhotonNetwork.IsConnected)
         {
             PhotonNetwork.ConnectUsingSettings();
@@ -26,27 +25,26 @@ public class JoinARoom : MonoBehaviourPunCallbacks
     {
         if (string.IsNullOrWhiteSpace(username.text))
         {
-            ShowWarning("Lütfen bir kullanýcý adý girin.");
+            ShowWarning("LÃ¼tfen bir kullanÄ±cÄ± adÄ± girin.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(roomName.text))
         {
-            ShowWarning("Lütfen bir oda adý girin.");
+            ShowWarning("LÃ¼tfen bir oda adï¿½ girin.");
             return;
         }
 
         PhotonNetwork.NickName = username.text;
 
-        // Odaya katýlma
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.JoinRoom(roomName.text);
-            Debug.Log("Katýldý.");
+            Debug.Log("KatÄ±ldÄ±.");
         }
         else
         {
-            ShowWarning("Baðlantý Hatasý!");
+            ShowWarning("BaÄŸlantÄ± HatasÄ±!");
         }
 
         //PhotonNetwork.LoadLevel("LobbyScene");
@@ -54,14 +52,12 @@ public class JoinARoom : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        // Master Server'a baþarýyla baðlandý
         Debug.Log("Connected.");
     }
 
     public override void OnJoinedRoom()
     {
-        // Odaya baþarýyla katýldýðýnda LobbyScene sahnesine geçiþ
-        PhotonNetwork.LoadLevel("LobbyScene");  // Odaya katýldýðýnda LobbyScene sahnesine yönlendirilir
+        PhotonNetwork.LoadLevel("LobbyScene");
     }
 
     private void ShowWarning(string message)
@@ -69,7 +65,7 @@ public class JoinARoom : MonoBehaviourPunCallbacks
         warningText.gameObject.SetActive(true);
         warningText.text = message;
 
-        // 3 saniye sonra uyarýyý gizle
+        // 3 saniye sonra uyarï¿½yï¿½ gizle
         StartCoroutine(HideWarning());
     }
 

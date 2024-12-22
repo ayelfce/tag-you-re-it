@@ -10,6 +10,8 @@ public class RoleBasedUI : MonoBehaviour
     public TMP_Text countdownText; // Geri sayım metni
     
     public GameTimer gameTimer;
+    public PhotonView photonView;
+
 
     private void Start()
     {
@@ -62,8 +64,6 @@ public class RoleBasedUI : MonoBehaviour
         }
     }
 
-
-
     private void HandleRole(object role)
     {
         Debug.Log($"Handling role: {role}");
@@ -74,6 +74,8 @@ public class RoleBasedUI : MonoBehaviour
         else
         {
             blackScreen.SetActive(false); // Ebe olmayanlar için siyah ekranı gizle
+            // "Hiding" rolü için de geri sayım başlatılacak
+            StartGameTimer();
         }
     }
 
@@ -93,8 +95,20 @@ public class RoleBasedUI : MonoBehaviour
         blackScreen.SetActive(false);
         if (gameTimer != null)
         {
-            gameTimer.StartTimer();  // GameTimer'ı başlat
+            // Ebe ekranında gameTimer başlatılıyor
+            gameTimer.StartTimer();  
         }
         countdownText.text = "";
+        // Diğer oyuncular için aynı anda başlat
+        photonView.RPC("StartGameTimer", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void StartGameTimer()
+    {
+        if (gameTimer != null)
+        {
+            gameTimer.StartTimer();  // Tüm oyuncular için gameTimer'ı başlat
+        }
     }
 }
