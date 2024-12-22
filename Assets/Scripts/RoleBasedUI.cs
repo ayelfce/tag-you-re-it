@@ -8,37 +8,93 @@ public class RoleBasedUI : MonoBehaviour
 {
     public GameObject blackScreen; // Siyah ekran için GameObject
     public TMP_Text countdownText; // Geri sayım metni
+    
+    public GameTimer gameTimer;
 
     private void Start()
     {
-        if (PhotonNetwork.LocalPlayer.CustomProperties["Role"].ToString() == "EBE")
+        // İlk başta Role kontrol et
+        CheckRole();
+    }
+
+    private void CheckRole()
+    {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
         {
-            // Eğer oyuncu Ebe ise ShowEbeScreen coroutine'ini başlat
+            // Role zaten atanmışsa işlemi başlat
+            object role = PhotonNetwork.LocalPlayer.CustomProperties["Role"];
+            HandleRole(role);
+        }
+        else
+        {
+            Debug.LogWarning("Role property is not set for this player. Retrying...");
+            // Role atanmadıysa 0.5 saniye bekleyerek tekrar kontrol et
+            StartCoroutine(WaitForRoleAssignment());
+        }
+    }
+
+    private IEnumerator WaitForRoleAssignment()
+    {
+        // Role ataması yapılana kadar bekle
+        int retries = 0; // Deneme sayısını takip et
+        while (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role") && retries < 10) // 10 deneme
+        {
+            Debug.Log("Waiting for Role assignment...");
+            retries++;
+            yield return new WaitForSeconds(1f); // 1 saniye bekle ve tekrar kontrol et
+        }
+
+        if (retries >= 10)
+        {
+            Debug.LogWarning("Role assignment took too long!");
+        }
+
+        // Role ataması tamamlandıktan sonra işlemi başlat
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
+        {
+            object role = PhotonNetwork.LocalPlayer.CustomProperties["Role"];
+            Debug.Log($"Role assigned: {role}");
+            HandleRole(role);
+        }
+        else
+        {
+            Debug.LogWarning("Role still not assigned.");
+        }
+    }
+
+
+
+    private void HandleRole(object role)
+    {
+        Debug.Log($"Handling role: {role}");
+        if (role.ToString() == "EBE")
+        {
             StartCoroutine(ShowEbeScreen());
         }
         else
         {
-            // Ebe olmayanlar için siyah ekranı gizle
-            blackScreen.SetActive(false);
+            blackScreen.SetActive(false); // Ebe olmayanlar için siyah ekranı gizle
         }
     }
 
     private IEnumerator ShowEbeScreen()
     {
-        // Siyah ekranı aktif et
+        Debug.Log("Ebe ekranı gösteriliyor.");
         blackScreen.SetActive(true);
 
-        // Geri sayımı başlat (10 saniye)
         for (int i = 10; i > 0; i--)
         {
-            countdownText.text = "Ebe sensin\n" + i.ToString(); // "Ebe sensin" mesajını ve geri sayımı göster
-            yield return new WaitForSeconds(1f); // 1 saniye bekle
+            countdownText.text = $"Ebe sensin\n{i}"; // Geri sayım
+            Debug.Log($"Geri sayım: {i}");
+            yield return new WaitForSeconds(1f);
         }
 
-        // Geri sayım bitince siyah ekranı kaldır
+        Debug.Log("Geri sayım bitti, siyah ekran kapatılıyor.");
         blackScreen.SetActive(false);
-
-        // Oyun başladığında başka bir işlem yapabilirsiniz
-        // Örneğin: oyun başlatmak için bir fonksiyon çağırabilirsiniz
+        if (gameTimer != null)
+        {
+            gameTimer.StartTimer();  // GameTimer'ı başlat
+        }
+        countdownText.text = "";
     }
 }

@@ -1,32 +1,3 @@
-// using System.Collections;
-// using System.Collections.Generic;
-// using UnityEngine;
-
-// public class GameManager : MonoBehaviour {
-
-//     public static GameManager Instance = null;                         
-
-//     void Awake()
-//     {
-
-//         if (Instance == null)
-//         {
-//             Instance = this;
-//         }
-
-//         else if (Instance != this)
-//         {
-//             Destroy(gameObject);
-//         }
-
-//         // Dont destroy on reloading the scene
-//         DontDestroyOnLoad(gameObject);
-
-
-//     }
-//     public Player Player;
-
-// }
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,17 +44,22 @@ public class GameManager : MonoBehaviourPunCallbacks
         int randomIndex = Random.Range(0, players.Length);
 
         // Ebe seç
-        players[randomIndex].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { RoleProperty, EBE } });
+        players[randomIndex].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", "EBE" } });
 
-        // Saklananlar için rol belirle
+        // Diğer oyuncular için rol belirle
         for (int i = 0; i < players.Length; i++)
         {
             if (i != randomIndex)
             {
-                players[i].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { RoleProperty, HIDING } });
+                players[i].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", "HIDING" } });
             }
         }
+
+        Debug.Log("Roles assigned successfully!");
     }
+
+
+
 
 
     // Doğru imza
@@ -96,6 +72,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
+
     public string GetPlayerRole(Photon.Realtime.Player player)
     {
         if (player.CustomProperties.TryGetValue(RoleProperty, out object role))
@@ -103,6 +80,16 @@ public class GameManager : MonoBehaviourPunCallbacks
             return (string)role;
         }
         return null;
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("Joined room, initializing Role-Based UI...");
+        RoleBasedUI roleBasedUI = FindObjectOfType<RoleBasedUI>();
+        if (roleBasedUI != null)
+        {
+            roleBasedUI.gameObject.SetActive(true);
+        }
     }
 
 }
