@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cat
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8fb83537a654c4c84bc25719ba157bf3, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     - target: {fileID: 1630794972795428178, guid: 8fb83537a654c4c84bc25719ba157bf3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

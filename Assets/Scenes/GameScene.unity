@@ -3872,6 +3872,7 @@ GameObject:
   - component: {fileID: 560005586}
   - component: {fileID: 560005585}
   - component: {fileID: 560005584}
+  - component: {fileID: 560005588}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -3894,12 +3895,7 @@ MonoBehaviour:
   PlayerTransform: {fileID: 6655703930390493057, guid: 64ebb27bdc656473ca2c7b4fb171259d, type: 3}
   _cameraOffset: {x: 0.18, y: 2.46, z: -3.35}
   SmoothFactor: 0.5
-  LookAtPlayer: 0
-  RotateAroundPlayer: 1
-  RotateMiddleMouseButton: 1
-  RotationsSpeed: 5
-  CameraPitchMin: 1.5
-  CameraPitchMax: 6.5
+  CameraPitch: 2
 --- !u!81 &560005585
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3974,6 +3970,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 21.795, y: 0, z: 0}
+--- !u!114 &560005588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560005583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60353e449e4a6774d913c262c3c5e949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 560005586}
+  interactRange: 12
 --- !u!1001 &577011365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8719,6 +8729,10 @@ PrefabInstance:
     - target: {fileID: 9069115365609291303, guid: 60f79905accf3b24fa0114b941f1aac0, type: 3}
       propertyPath: m_Name
       value: Tree_05
+      objectReference: {fileID: 0}
+    - target: {fileID: 9069115365609291303, guid: 60f79905accf3b24fa0114b941f1aac0, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
