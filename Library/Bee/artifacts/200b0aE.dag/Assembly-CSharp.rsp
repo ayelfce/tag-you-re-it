@@ -372,6 +372,7 @@
 "Assets/Scripts/Player.cs"
 "Assets/Scripts/PlayerAnimator.cs"
 "Assets/Scripts/PlayerFollow.cs"
+"Assets/Scripts/RoleBasedUI.cs"
 "Assets/Scripts/RoomManager.cs"
 "Assets/Scripts/SpawnPlayers.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"

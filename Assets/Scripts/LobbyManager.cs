@@ -9,7 +9,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public TMP_Text roomNameText; // Odanın adı için metin
     public TMP_Text playerListText; // Oyuncu listesi için metin
-    public GameObject startButton; // Oyun başlatma butonu (sadece MasterClient için)
+    public GameObject startButton; // Oyun başlatma butonu (herkeste görünür olacak)
 
     private void Start()
     {
@@ -29,15 +29,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             playerListText.text += player.NickName + "\n"; // Oda içindeki her oyuncuyu listele
         }
 
-        // Start button'ı yalnızca odayı oluşturan (MasterClient) görebilir
-        if (PhotonNetwork.IsMasterClient)
-        {
-            startButton.SetActive(true);
-        }
-        else
-        {
-            startButton.SetActive(false);
-        }
+        // Start button'ı tüm oyuncular için görünebilir olacak
+        startButton.SetActive(true);
     }
 
     // Oyuncu listesini periyodik olarak güncellemek için coroutine
@@ -53,9 +46,30 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     // Oyun başlatma butonuna basıldığında
     public void StartGame()
     {
-        if (PhotonNetwork.IsMasterClient) // Yalnızca odayı kuran kişi bu butona basabilir
+        if (PhotonNetwork.IsMasterClient) // Yalnızca odayı kuran kişi (MasterClient) bu butona basabilir
         {
-            PhotonNetwork.LoadLevel("GameScene"); // Oyunu başlatmak için GameScene'e geçiş yap
+            Debug.Log("Game starting, calling RPC...");
+            photonView.RPC("LoadGameScene", RpcTarget.AllBuffered); // RPC tüm oyunculara çağrılacak
         }
+        else
+        {
+            Debug.Log("Only the MasterClient can start the game.");
+        }
+    }
+
+    // RPC metodu, tüm oyunculara sahne yüklenmesini iletir
+    [PunRPC]
+    private void LoadGameScene()
+    {
+        Debug.Log("Loading game scene for all players...");
+        PhotonNetwork.LoadLevel("GameScene"); // Burada sahne yükleniyor
+    }
+
+    // Oyun başladığında, MasterClient dışında her oyuncu sahneye yüklenecek
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+
+        Debug.Log("Player joined room: " + PhotonNetwork.LocalPlayer.NickName);
     }
 }

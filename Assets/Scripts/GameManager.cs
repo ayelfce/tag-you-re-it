@@ -32,6 +32,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private const string RoleProperty = "Role"; // Custom property anahtarı
     private const string EBE = "Ebe";
     private const string HIDING = "Hiding";
+    // public GameObject roleBasedUI;
 
     void Awake()
     {
@@ -60,19 +63,19 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             AssignRoles();
+            // roleBasedUI.SetActive(true);
         }
     }
 
     private void AssignRoles()
     {
-        // Tüm oyuncuları al
         Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
-
-        // Rastgele bir ebe seç
         int randomIndex = Random.Range(0, players.Length);
+
+        // Ebe seç
         players[randomIndex].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { RoleProperty, EBE } });
 
-        // Diğer oyuncuları saklanan yap
+        // Saklananlar için rol belirle
         for (int i = 0; i < players.Length; i++)
         {
             if (i != randomIndex)
@@ -81,6 +84,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
     }
+
 
     // Doğru imza
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
@@ -100,54 +104,5 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         return null;
     }
+
 }
-
-// using UnityEngine;
-// using Photon.Pun;
-// using TMPro;
-// using System.Collections;
-
-// public class GameManager : MonoBehaviourPunCallbacks
-// {
-//     public TextMeshProUGUI countdownText;
-//     public GameObject blackScreenPanel;
-//     private bool isEbe = false;
-//     private float countdownTime = 10f;
-
-//     private void Start()
-//     {
-//         if (PhotonNetwork.IsMasterClient)
-//         {
-//             int randomIndex = Random.Range(0, PhotonNetwork.PlayerList.Length);
-//             Photon.Realtime.Player selectedPlayer = PhotonNetwork.PlayerList[randomIndex];
-
-//             photonView.RPC("SetEbe", RpcTarget.All, selectedPlayer.NickName);
-//         }
-//     }
-
-//     [PunRPC]
-//     public void SetEbe(string ebeName)
-//     {
-//         if (PhotonNetwork.NickName == ebeName)
-//         {
-//             isEbe = true;
-//             StartCoroutine(StartCountdown());
-//         }
-//     }
-
-//     private IEnumerator StartCountdown()
-//     {
-//         blackScreenPanel.SetActive(true);
-//         countdownText.gameObject.SetActive(true);
-
-//         while (countdownTime > 0)
-//         {
-//             countdownText.text = "Ebe sensin! " + Mathf.Ceil(countdownTime) + " saniye kaldı!";
-//             countdownTime -= Time.deltaTime;
-//             yield return null;
-//         }
-
-//         countdownText.gameObject.SetActive(false);
-//         blackScreenPanel.SetActive(false);
-//     }
-// }
