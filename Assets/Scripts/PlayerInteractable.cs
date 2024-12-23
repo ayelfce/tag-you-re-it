@@ -25,6 +25,7 @@ public class PlayerInteractable : MonoBehaviour
                     clickedPlayer.isSeen = true; // Oyuncuyu seen olarak iþaretle
                     GameManager.Instance.seenPlayers.Add(clickedPlayer); // Listeye ekle
                     Debug.Log($"{playerName} GameManager'daki seenPlayers listesine eklendi!");
+                    GameManager.Instance.notificationList.Add($"{playerName} is seen!!!");
                 }else
                 {
                     Debug.Log($"{playerName} zaten GameManager'daki seenPlayers listesinde!");

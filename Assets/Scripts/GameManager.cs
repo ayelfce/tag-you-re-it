@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private const string EBE = "Ebe";
     private const string HIDING = "Hiding";
     public List<Player> seenPlayers = new List<Player>();
+    public List<string> notificationList = new List<string>();
     // public GameObject roleBasedUI;
 
     void Awake()
