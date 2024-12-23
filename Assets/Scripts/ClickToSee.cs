@@ -16,7 +16,7 @@ public class ClickToInteract : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 // Týklanan objenin tag'ini kontrol et veya iþlem yap
-                Debug.Log("Týklanan obje: " + hit.transform.name);
+                //Debug.Log("Týklanan obje: " + hit.transform.name);
 
                 // Örneðin, bir obje týklandýðýnda bir fonksiyon çaðýrabiliriz
                 if (hit.transform.CompareTag("Interactable"))

@@ -153,4 +153,9 @@ public class Player : MonoBehaviour
     {
         return isWalking;
     }
+
+    public string GetPlayerName()
+    {
+        return usernameText.text;
+    }
 }
