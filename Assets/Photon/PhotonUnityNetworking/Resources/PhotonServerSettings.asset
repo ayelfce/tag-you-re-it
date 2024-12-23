@@ -42,6 +42,7 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - StartGameTimer
+  - HandleTriggerEvent
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
