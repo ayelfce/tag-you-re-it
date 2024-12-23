@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private const string RoleProperty = "Role"; // Custom property anahtarı
     private const string EBE = "Ebe";
     private const string HIDING = "Hiding";
+    public List<Player> seenPlayers = new List<Player>();
     // public GameObject roleBasedUI;
 
     void Awake()
@@ -58,7 +59,18 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("Roles assigned successfully!");
     }
 
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L)) // Test için 'L' tuşuna bas
+        {
+            //List<Player> seenPlayers = GetSeenPlayers();
+            Debug.Log($"Seen Players Count: {seenPlayers.Count}");
+            foreach (Player player in seenPlayers)
+            {
+                Debug.Log(player.view.Owner.NickName);
+            }
+        }
+    }
 
 
 

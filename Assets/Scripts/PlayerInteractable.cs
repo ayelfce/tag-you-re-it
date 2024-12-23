@@ -20,6 +20,15 @@ public class PlayerInteractable : MonoBehaviour
             if (PhotonNetwork.LocalPlayer.CustomProperties["Role"]?.ToString() == "EBE")
             {
                 Debug.Log($"{playerName} isimli oyuncuya týkladýnýz!");
+                if (!GameManager.Instance.seenPlayers.Contains(clickedPlayer))
+                {
+                    clickedPlayer.isSeen = true; // Oyuncuyu seen olarak iþaretle
+                    GameManager.Instance.seenPlayers.Add(clickedPlayer); // Listeye ekle
+                    Debug.Log($"{playerName} GameManager'daki seenPlayers listesine eklendi!");
+                }else
+                {
+                    Debug.Log($"{playerName} zaten GameManager'daki seenPlayers listesinde!");
+                }
             }
         }
         else

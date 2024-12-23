@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
     private float turnSmoothVelocity;
 
     private bool isWalking;
+    public bool isSeen;
 
     private Transform cameraTransform; // Kamera referansı
 

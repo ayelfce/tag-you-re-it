@@ -838,6 +838,7 @@ MonoBehaviour:
   gravity: -9.81
   view: {fileID: 8304591127520294980}
   usernameText: {fileID: 1508537843059116637}
+  isSeen: 0
 --- !u!143 &3150567783827050237
 CharacterController:
   m_ObjectHideFlags: 0
