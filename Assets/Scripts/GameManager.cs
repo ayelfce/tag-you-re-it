@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     private const string EBE = "Ebe";
     private const string HIDING = "Hiding";
     public List<Player> seenPlayers = new List<Player>();
+    public List<Player> seekedPlayers = new List<Player>();
     public List<string> notificationList = new List<string>();
+    private bool tourEnd=false;
     // public GameObject roleBasedUI;
 
     void Awake()
@@ -62,14 +64,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L)) // Test için 'L' tuşuna bas
+        if (GameManager.Instance.seekedPlayers.Count != 0 && !tourEnd)
         {
-            //List<Player> seenPlayers = GetSeenPlayers();
-            Debug.Log($"Seen Players Count: {seenPlayers.Count}");
-            foreach (Player player in seenPlayers)
-            {
-                Debug.Log(player.view.Owner.NickName);
-            }
+            GameManager.Instance.notificationList.Add($"{GameManager.Instance.seekedPlayers[0].GetPlayerName()} is SEEKER");
+            tourEnd = true;
         }
     }
 

@@ -2,33 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using ExitGames.Client.Photon;
 
 public class TagArea : MonoBehaviourPunCallbacks
 {
-    // OnTriggerEnter fonksiyonu, Photon nesnesi olsa bile çalışır
+    private const string EBE_ROLE = "EBE"; // Ebe rolü tanımı
+
     private void OnTriggerEnter(Collider other)
     {
-        // Trigger'a giren nesne Photon nesnesi de olsa algılar
-        Debug.Log("Trigger'a girildi: " + other.gameObject.name);
-        
-        // Eğer giren nesne bir PhotonView nesnesiyse, bunu ağda bildir
-        if (other.gameObject.GetComponent<PhotonView>() != null)
+        PhotonView otherPhotonView = other.GetComponent<PhotonView>();
+
+        if (otherPhotonView != null && otherPhotonView.Owner != null)
         {
-            Debug.Log("Photon nesnesi ile trigger'a girildi: " + other.gameObject.name);
-            
-            // Burada istediğiniz işlemi yapabilirsiniz, örneğin RPC çağırmak
-            if (PhotonNetwork.IsMasterClient)
+            // Oyuncunun rolünü al
+            object playerRole;
+            if (otherPhotonView.Owner.CustomProperties.TryGetValue("Role", out playerRole))
             {
-                photonView.RPC("HandleTriggerEvent", RpcTarget.All);
+                if (playerRole.ToString() == EBE_ROLE)
+                {
+                    List<Player> removeList = new List<Player>();
+                    Debug.Log("Ebe alana girdi: " + otherPhotonView.Owner.NickName);
+                    foreach (Player player in GameManager.Instance.seenPlayers)
+                    {
+                        removeList.Add(player);
+                        GameManager.Instance.seekedPlayers.Add(player);
+                        GameManager.Instance.notificationList.Add($"{player.GetPlayerName()} is seeked.");
+                        player.sobelenemez = true;
+                    }
+                    foreach (Player player in removeList)
+                    {
+                        GameManager.Instance.seenPlayers.Remove(player);
+                    }
+                    
+                    
+                    // Alana girdiğinde bir RPC çağır
+                    if (PhotonNetwork.IsMasterClient)
+                    {
+                        photonView.RPC("OnEbeEnterArea", RpcTarget.All, otherPhotonView.Owner.NickName);
+                    }
+                }
+                else
+                {
+                    Debug.Log("Alana giren oyuncunun rolü: " + playerRole);
+                }
             }
+            else
+            {
+                Debug.Log("Oyuncunun rolü bulunamadı.");
+            }
+        }
+        else
+        {
+            Debug.Log("PhotonView bulunamadı veya Owner yok.");
         }
     }
 
-    // Bu RPC metodu, tüm oyunculara trigger olayını bildirir
     [PunRPC]
-    public void HandleTriggerEvent()
+    public void OnEbeEnterArea(string playerName)
     {
-        // Bu metod tüm istemcilerde çağrılacaktır
-        Debug.Log("Trigger olayı tüm oyuncularda işleniyor");
+        Debug.Log("Ebe alana girdi (RPC çağrısı): " + playerName);
     }
 }

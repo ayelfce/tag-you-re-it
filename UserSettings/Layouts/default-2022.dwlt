@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 868.8
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 96
+  controlID: 84
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -69,8 +69,8 @@ MonoBehaviour:
     y: 0
     width: 393.59998
     height: 818.8
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -95,8 +95,8 @@ MonoBehaviour:
     y: 0
     width: 189.6
     height: 548.8
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -121,8 +121,8 @@ MonoBehaviour:
     y: 548.8
     width: 1142.4
     height: 270
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 12}
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 38
+  controlID: 48
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 39
+  controlID: 40
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -339,9 +339,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 47}
-    m_SelectedIDs: 10070000
-    m_LastClickedID: 1808
-    m_ExpandedIDs: 000000000406000000ca9a3b
+    m_SelectedIDs: 54710000
+    m_LastClickedID: 29012
+    m_ExpandedIDs: 00000000e05e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -369,7 +369,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 00000000e05e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -394,8 +394,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 64710000
+    m_LastClickedInstanceID: 29028
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300003a620000da610000
     m_RenameOverlay:
@@ -509,23 +509,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 64710000
       m_LastClickedID: 0
-      m_ExpandedIDs: e6d9feff48dafeff76e4feffc8e4feff1ee5feff30e6feff
+      m_ExpandedIDs: 8a09feffe219feff7a32feff883dfeff7072feffba72feffc47ffeffdc7ffeff0080feff2a80feff4880feff6480feffdae5feff6af5feff2c1fffff8c1ffffff01fffff4220ffff1a4dffffee5cffff3c84ffffae85ffffd698ffffa4a3ffffc8b1fffffcbcffff58bdfffff4d4ffff0efbffff00a0000028250100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: PlayGround
+        m_OriginalName: PlayGround
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 35160
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -878,9 +878,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 324.92426, y: 120.84622, z: -308.46704}
+    m_Target: {x: 43.273277, y: -8.291448, z: -15.692815}
     speed: 2
-    m_Value: {x: 324.92426, y: 120.84622, z: -308.46704}
+    m_Value: {x: 43.273277, y: -8.291448, z: -15.692815}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -926,13 +926,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.09635742, y: -0.5514527, z: 0.06431549, w: -0.82613033}
+    m_Target: {x: -0.2851612, y: -0.42597026, z: 0.14348604, w: -0.84655666}
     speed: 2
-    m_Value: {x: -0.09635681, y: -0.55144924, z: 0.06431508, w: -0.8261251}
+    m_Value: {x: -0.2851592, y: -0.42596725, z: 0.14348502, w: -0.8465507}
   m_Size:
-    m_Target: 621.33966
+    m_Target: 2.772915
     speed: 2
-    m_Value: 621.33966
+    m_Value: 2.772915
   m_Ortho:
     m_Target: 0
     speed: 2

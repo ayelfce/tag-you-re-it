@@ -80,14 +80,17 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshPro usernameText;
     private Vector3 velocity;
     private float turnSmoothVelocity;
+    public bool sobelenemez = false;
 
     private bool isWalking;
     public bool isSeen;
+    public bool isInSeek = false;
 
     private Transform cameraTransform; // Kamera referansı
 
     private void Start()
     {
+        
         if (view.IsMine)
         {
             usernameText.text = PhotonNetwork.NickName; // Kullanıcı adı ayarla
@@ -103,6 +106,12 @@ public class Player : MonoBehaviour
         if (cameraTransform == null)
         {
             Debug.LogError("MainCamera bulunamadı! Sahneye bir kamera eklediğinizden ve tag'ini 'MainCamera' olarak ayarladığınızdan emin olun.");
+        }
+
+        if (PhotonNetwork.LocalPlayer.CustomProperties["Role"].ToString() == "EBE")
+        {
+            Debug.Log("Ebesin");
+            sobelenemez = true;
         }
     }
 
@@ -158,5 +167,15 @@ public class Player : MonoBehaviour
     public string GetPlayerName()
     {
         return usernameText.text;
+    }
+
+    public void enteredSeek()
+    {
+        isInSeek = true;
+    }
+
+    public void exitedSeek()
+    {
+        isInSeek = false;
     }
 }
