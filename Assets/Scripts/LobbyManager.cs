@@ -55,6 +55,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("Only the MasterClient can start the game.");
         }
+        
     }
 
     // RPC metodu, tüm oyunculara sahne yüklenmesini iletir

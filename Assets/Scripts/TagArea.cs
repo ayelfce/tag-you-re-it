@@ -7,6 +7,7 @@ using ExitGames.Client.Photon;
 public class TagArea : MonoBehaviourPunCallbacks
 {
     private const string EBE_ROLE = "EBE"; // Ebe rolü tanımı
+    private Player sobeci;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,10 +25,13 @@ public class TagArea : MonoBehaviourPunCallbacks
                     Debug.Log("Ebe alana girdi: " + otherPhotonView.Owner.NickName);
                     foreach (Player player in GameManager.Instance.seenPlayers)
                     {
-                        removeList.Add(player);
-                        GameManager.Instance.seekedPlayers.Add(player);
-                        GameManager.Instance.notificationList.Add($"{player.GetPlayerName()} is seeked.");
-                        player.sobelenemez = true;
+                        if (!player.sobelenemez)
+                        {
+                            removeList.Add(player);
+                            GameManager.Instance.seekedPlayers.Add(player);
+                            GameManager.Instance.notificationList.Add($"{player.GetPlayerName()} is seeked.");
+                            player.sobelenemez = true;
+                        }
                     }
                     foreach (Player player in removeList)
                     {
@@ -43,7 +47,11 @@ public class TagArea : MonoBehaviourPunCallbacks
                 }
                 else
                 {
-                    Debug.Log("Alana giren oyuncunun rolü: " + playerRole);
+                    if (!GameManager.Instance.sobelenemezler.Contains(otherPhotonView.Owner.NickName))
+                    {
+                        GameManager.Instance.sobelenemezler.Add(otherPhotonView.Owner.NickName);
+                        GameManager.Instance.notificationList.Add($"{otherPhotonView.Owner.NickName} COMPLETED.");
+                    }
                 }
             }
             else

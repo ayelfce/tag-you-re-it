@@ -3,48 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|c:\\users\\\u015Feyma\\projectssoftware\\our-project\\assets\\scripts\\tagarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\tagarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\TagArea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\TagArea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\seenPlayers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\seenPlayers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\seenPlayers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\seenPlayers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\LobbyManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\LobbyManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\PlayerInteractable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\PlayerInteractable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\PlayerInteractable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\PlayerInteractable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\LobbyManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\LobbyManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\RoleBasedUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\RoleBasedUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\RoleBasedUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\RoleBasedUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\PlayerAnimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\PlayerAnimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\PlayerAnimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\PlayerAnimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\Player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\Player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\Player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\PlayerFollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\PlayerFollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\PlayerFollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\PlayerFollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\mainMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\mainMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\mainMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\mainMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\RoomManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2B5AD1AF-1A7E-7F82-71EA-9EDFF7813717}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\RoomManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\RoomManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\RoomManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,9 +62,9 @@
               "Title": "TagArea.cs",
               "DocumentMoniker": "C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\TagArea.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\TagArea.cs",
-              "ToolTip": "C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\TagArea.cs*",
-              "RelativeToolTip": "Assets\\Scripts\\TagArea.cs*",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAwCMAAABmAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\TagArea.cs",
+              "RelativeToolTip": "Assets\\Scripts\\TagArea.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAIwDUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T21:50:26.943Z",
               "EditorCaption": ""
@@ -79,43 +79,46 @@
               "RelativeToolTip": "Assets\\Scripts\\seenPlayers.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T18:38:23.04Z"
+              "WhenOpened": "2024-12-23T18:38:23.04Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "LobbyManager.cs",
               "DocumentMoniker": "C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\LobbyManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\LobbyManager.cs",
               "ToolTip": "C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\LobbyManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\LobbyManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAIwDkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T18:38:59.073Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "GameManager.cs",
               "DocumentMoniker": "C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager.cs",
               "ToolTip": "C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\GameManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\GameManager.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAAwEEAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAAAIEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T12:12:06.731Z"
+              "WhenOpened": "2024-12-23T12:12:06.731Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "PlayerInteractable.cs",
               "DocumentMoniker": "C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\PlayerInteractable.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerInteractable.cs",
               "ToolTip": "C:\\Users\\\u015Eeyma\\projectsSoftware\\our-project\\Assets\\Scripts\\PlayerInteractable.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerInteractable.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABsAAABaAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T12:07:27.223Z"
+              "WhenOpened": "2024-12-23T12:07:27.223Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

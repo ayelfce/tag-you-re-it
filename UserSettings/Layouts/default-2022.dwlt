@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: 0
-    y: 43.2
+    x: 11.2
+    y: 50.4
     width: 1536
     height: 868.8
   m_ShowMode: 4
@@ -23,7 +23,7 @@ MonoBehaviour:
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
-  m_Maximized: 1
+  m_Maximized: 0
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -95,8 +95,8 @@ MonoBehaviour:
     y: 0
     width: 189.6
     height: 548.8
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -121,8 +121,8 @@ MonoBehaviour:
     y: 548.8
     width: 1142.4
     height: 270
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 12}
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 48
+  controlID: 39
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: GameView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -273,12 +273,12 @@ MonoBehaviour:
     height: 548.8
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 15}
+  m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 15}
   - {fileID: 16}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -299,8 +299,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 622.4
+    x: 96.8
+    y: 629.60004
     width: 1141.4
     height: 249
   m_SerializedDataModeController:
@@ -339,9 +339,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 47}
-    m_SelectedIDs: 54710000
-    m_LastClickedID: 29012
-    m_ExpandedIDs: 00000000e05e000000ca9a3b
+    m_SelectedIDs: fa5e0000
+    m_LastClickedID: 24314
+    m_ExpandedIDs: 00000000e45e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -369,7 +369,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000e05e0000
+    m_ExpandedIDs: 00000000e45e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -394,8 +394,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 64710000
-    m_LastClickedInstanceID: 29028
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300003a620000da610000
     m_RenameOverlay:
@@ -445,8 +445,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1142.4
-    y: 73.6
+    x: 1153.6
+    y: 80.8
     width: 392.59998
     height: 797.8
   m_SerializedDataModeController:
@@ -492,8 +492,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 73.6
+    x: 11.2
+    y: 80.8
     width: 188.6
     height: 527.8
   m_SerializedDataModeController:
@@ -509,23 +509,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 64710000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 8a09feffe219feff7a32feff883dfeff7072feffba72feffc47ffeffdc7ffeff0080feff2a80feff4880feff6480feffdae5feff6af5feff2c1fffff8c1ffffff01fffff4220ffff1a4dffffee5cffff3c84ffffae85ffffd698ffffa4a3ffffc8b1fffffcbcffff58bdfffff4d4ffff0efbffff00a0000028250100
+      m_ExpandedIDs: e66fffff2270ffff247dffff347dffff507dffff727dffff887dffff9c7dffff8ce5ffff76f9ffff0efbffff1a5f0000d8610000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: PlayGround
-        m_OriginalName: PlayGround
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 35160
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -977,8 +977,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 189.6
-    y: 73.6
+    x: 200.8
+    y: 80.8
     width: 950.80005
     height: 527.8
   m_SerializedDataModeController:
@@ -1024,7 +1024,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -1075,8 +1075,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 622.4
+    x: 11.2
+    y: 629.60004
     width: 1141.4
     height: 249
   m_SerializedDataModeController:

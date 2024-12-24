@@ -108,11 +108,6 @@ public class Player : MonoBehaviour
             Debug.LogError("MainCamera bulunamadı! Sahneye bir kamera eklediğinizden ve tag'ini 'MainCamera' olarak ayarladığınızdan emin olun.");
         }
 
-        if (PhotonNetwork.LocalPlayer.CustomProperties["Role"].ToString() == "EBE")
-        {
-            Debug.Log("Ebesin");
-            sobelenemez = true;
-        }
     }
 
     private void Update()

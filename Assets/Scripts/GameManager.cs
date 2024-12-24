@@ -12,10 +12,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     private const string RoleProperty = "Role"; // Custom property anahtarı
     private const string EBE = "Ebe";
     private const string HIDING = "Hiding";
+    public List<string> sobelenemezler = new List<string>();
     public List<Player> seenPlayers = new List<Player>();
     public List<Player> seekedPlayers = new List<Player>();
     public List<string> notificationList = new List<string>();
     private bool tourEnd=false;
+    public Player[] allPlayers;
     // public GameObject roleBasedUI;
 
     void Awake()
@@ -28,8 +30,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Destroy(gameObject);
         }
+        
 
         DontDestroyOnLoad(gameObject); // Sahneler arası geçişte korunur
+
+        
     }
 
     void Start()
@@ -39,6 +44,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             AssignRoles();
             // roleBasedUI.SetActive(true);
+        }
+        allPlayers = FindObjectsOfType<Player>();
+        Debug.Log("Player yok ki");
+        foreach (Player p in allPlayers)
+        {
+            Debug.Log("Oyuncu: " + p.GetPlayerName().ToString());
         }
     }
 
@@ -68,6 +79,19 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             GameManager.Instance.notificationList.Add($"{GameManager.Instance.seekedPlayers[0].GetPlayerName()} is SEEKER");
             tourEnd = true;
+        }
+        List<Player> removee = new List<Player>();
+        foreach (Player player in seenPlayers)
+        {
+            if (sobelenemezler.Contains(player.GetPlayerName()))
+            {
+                player.sobelenemez = true;
+                removee.Add(player);
+            }
+        }
+        foreach (Player playere in removee)
+        {
+            seenPlayers.Remove(playere);
         }
     }
 
