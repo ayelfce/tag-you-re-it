@@ -46,6 +46,9 @@ MonoBehaviour:
   - OnPlayerEnter
   - OnPlayerExit
   - OnEbeEnterArea
+  - UpdateCountdownText
+  - StartTimer
+  - ShowEbeScreen
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

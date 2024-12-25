@@ -2761,7 +2761,7 @@ MonoBehaviour:
   blackScreen: {fileID: 534875635}
   countdownText: {fileID: 1189825619}
   gameTimer: {fileID: 1020294537}
-  photonView: {fileID: 1020294539}
+  photonView: {fileID: 353140605}
 --- !u!114 &353140601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2866,7 +2866,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 2
+  sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1001 &363291728
@@ -4444,9 +4444,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2e02a7307804dcfad2c6b4cebbcc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sobelenemezler: []
   seenPlayers: []
   seekedPlayers: []
   notificationList: []
+  allPlayers: []
 --- !u!114 &581320050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4466,7 +4468,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 3
+  sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1001 &584414550

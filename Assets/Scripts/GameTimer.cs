@@ -1,3 +1,4 @@
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public class GameTimer : MonoBehaviour
     public float timeLeft = 120f;
     private bool timerIsRunning = false;
 
+    [PunRPC]
     public void StartTimer()
     {
         timerIsRunning = true;  // Timer'ı başlat
@@ -30,6 +32,7 @@ public class GameTimer : MonoBehaviour
         }
     }
 
+    [PunRPC]
     void UpdateCountdownText(float time)
     {
         int minutes = Mathf.FloorToInt(time / 60);
