@@ -82,6 +82,7 @@ public class RoleBasedUI : MonoBehaviour
     private IEnumerator ShowEbeScreen()
     {
         Debug.Log("Ebe ekranı gösteriliyor.");
+
         blackScreen.SetActive(true);
 
         for (int i = 10; i > 0; i--)

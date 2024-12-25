@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class JoinARoom : MonoBehaviourPunCallbacks
 {
@@ -19,6 +20,11 @@ public class JoinARoom : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.ConnectUsingSettings();
         }
+    }
+
+    public void GoBackButton()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void JoinARoomButton()
@@ -60,6 +66,12 @@ public class JoinARoom : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("LobbyScene");
     }
 
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log($"Odaya katılma başarısız: {message}");
+        ShowWarning("Room does not exist.");
+    }
+
     private void ShowWarning(string message)
     {
         warningText.gameObject.SetActive(true);
@@ -75,5 +87,5 @@ public class JoinARoom : MonoBehaviourPunCallbacks
         warningText.gameObject.SetActive(false);
     }
 
-    
+
 }

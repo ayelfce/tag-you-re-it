@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -22,6 +23,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.ConnectUsingSettings();
         }
+    }
+
+    public void GoBackButton() {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void CreateButton()

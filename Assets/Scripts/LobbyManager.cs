@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
@@ -18,6 +19,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         UpdatePlayerList(); // Oyuncu listesini güncelle
         StartCoroutine(UpdatePlayerListPeriodically()); // Oyuncu listesini periyodik olarak güncelle
+    }
+
+    public void LeaveRoomButton() {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("MainMenu");
     }
 
     // Oyuncuların listesi her değiştiğinde güncellenir
