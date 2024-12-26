@@ -5,6 +5,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -16,9 +18,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public List<Player> seenPlayers = new List<Player>();
     public List<Player> seekedPlayers = new List<Player>();
     public List<string> notificationList = new List<string>();
-    private bool tourEnd=false;
+    private bool tourEnd = false;
     public Player[] allPlayers;
     // public GameObject roleBasedUI;
+    public GameTimer timer;
 
     void Awake()
     {
@@ -30,11 +33,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Destroy(gameObject);
         }
-        
 
         DontDestroyOnLoad(gameObject); // Sahneler arası geçişte korunur
-
-        
     }
 
     void Start()
@@ -75,10 +75,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+        // OtherEndings() fonksiyonunu Update() içinde çağırın
+        OtherEndings(); 
+
         if (GameManager.Instance.seekedPlayers.Count != 0 && !tourEnd)
         {
             GameManager.Instance.notificationList.Add($"{GameManager.Instance.seekedPlayers[0].GetPlayerName()} is SEEKER");
             tourEnd = true;
+            EndRound();
         }
         List<Player> removee = new List<Player>();
         foreach (Player player in seenPlayers)
@@ -95,8 +99,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
-
-
     // Doğru imza
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
@@ -106,7 +108,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             Debug.Log($"Player {targetPlayer.NickName} is assigned as {role}");
         }
     }
-
 
     public string GetPlayerRole(Photon.Realtime.Player player)
     {
@@ -127,4 +128,23 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void OtherEndings()
+    {
+        // Tüm oyuncular yakalandıysa (Ebe hariç)
+        if (seekedPlayers.Count == (allPlayers.Length - 1) && seekedPlayers.Count != 0)
+        {
+            EndRound();
+        }
+
+        // Zaman dolduysa
+        if (timer != null && timer.timeLeft <= 0) 
+        {
+            EndRound();
+        }
+    }
+
+    public void EndRound()
+    {
+        SceneManager.LoadScene("EndRoundScreen");
+    }
 }

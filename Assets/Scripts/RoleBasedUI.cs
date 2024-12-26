@@ -70,6 +70,7 @@ public class RoleBasedUI : MonoBehaviour
         if (role.ToString() == "EBE")
         {
             StartCoroutine(ShowEbeScreen());
+            StartGameTimer();
         }
         else
         {
@@ -94,11 +95,11 @@ public class RoleBasedUI : MonoBehaviour
 
         Debug.Log("Geri sayım bitti, siyah ekran kapatılıyor.");
         blackScreen.SetActive(false);
-        if (gameTimer != null)
-        {
-            // Ebe ekranında gameTimer başlatılıyor
-            gameTimer.StartTimer();  
-        }
+        // if (gameTimer != null)
+        // {
+        //     // Ebe ekranında gameTimer başlatılıyor
+        //     gameTimer.StartTimer();  
+        // }
         countdownText.text = "";
         // Diğer oyuncular için aynı anda başlat
         photonView.RPC("StartGameTimer", RpcTarget.All);
