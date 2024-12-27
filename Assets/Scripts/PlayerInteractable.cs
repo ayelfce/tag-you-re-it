@@ -3,45 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using UnityEditor;
-
 
 public class PlayerInteractable : MonoBehaviour
 {
     private void OnMouseDown()
-    {
-        // T�klanan objenin Player scriptini bul
-        Player clickedPlayer = GetComponent<Player>();
-        if (clickedPlayer != null)
-        {
-            string playerName = clickedPlayer.GetPlayerName();
-            Debug.Log($"T�klanan oyuncu: {playerName}");
+{
+    Photon.Realtime.Player clickedPlayer = GetComponent<PhotonView>().Owner;
 
-            // E�er ebe isen i�lem yap
-            if (PhotonNetwork.LocalPlayer.CustomProperties["Role"]?.ToString() == "EBE")
+    if (clickedPlayer != null)
+    {
+        string playerName = clickedPlayer.NickName;
+        Debug.Log($"Tıklanan oyuncu: {playerName}");
+
+        // Ebe olan oyuncunun kendisine tıklanması durumunda işlemi engelle
+        if (PhotonNetwork.LocalPlayer.CustomProperties["Role"]?.ToString() == "EBE")
+        {
+            if (clickedPlayer == PhotonNetwork.LocalPlayer)
             {
-                Debug.Log($"{playerName} isimli oyuncuya t�klad�n�z!");
-                if (!GameManager.Instance.seenPlayers.Contains(clickedPlayer) )
+                Debug.Log("Ebe kendisine tıklayamaz!");
+                return;  // Eğer tıklanan oyuncu Ebe ve kendisi ise, işlemi sonlandır
+            }
+
+            Debug.Log($"{playerName} isimli oyuncuya tıkladınız!");
+
+            // Eğer tıklanan oyuncu sobelenemezler listesinde değilse ve seenPlayers listesinde değilse
+            if (!GameManager.Instance.sobelenemezler.ContainsKey(clickedPlayer) &&
+                !GameManager.Instance.seenPlayers.Contains(clickedPlayer))
+            {
+                // Hiding rolünde olduğu kontrolü
+                if (GameManager.Instance.GetPlayerRole(clickedPlayer) == "Hiding")
                 {
-                    if (!clickedPlayer.sobelenemez)
-                    {
-                        clickedPlayer.isSeen = true; // Oyuncuyu seen olarak i�aretle
-                        GameManager.Instance.seenPlayers.Add(clickedPlayer); // Listeye ekle
-                        Debug.Log($"{playerName} GameManager'daki seenPlayers listesine eklendi!");
-                        GameManager.Instance.notificationList.Add($"{playerName} is seen!!!");
-                    }
-                    
-                }else
-                {
-                    Debug.Log($"{playerName} zaten GameManager'daki seenPlayers listesinde!");
+                    GameManager.Instance.seenPlayers.Add(clickedPlayer);
+                    Debug.Log($"{playerName} GameManager'daki seenPlayers listesine eklendi!");
+                    GameManager.Instance.notificationList.Add($"{playerName} is seen!!!");
                 }
             }
+            else
+            {
+                Debug.Log($"{playerName} sobelenemezler listesinde veya zaten seenPlayers listesinde!");
+            }
         }
-        else
-        {
-            Debug.Log("T�klanan nesnede Player scripti yok.");
-        }
+    }
+    else
+    {
+        Debug.Log("Tıklanan nesnede Photon.Realtime.Player scripti yok.");
     }
 }
 
-
+}
