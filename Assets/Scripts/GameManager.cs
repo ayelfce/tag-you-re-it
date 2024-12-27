@@ -4,14 +4,15 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    public static GameManager Instance = null; // Singleton
+    public static GameManager Instance { get; private set; }
     private const string RoleProperty = "Role"; // Custom property anahtarı
     private const string EBE = "EBE";
     private const string HIDING = "Hiding";
-
+    private Photon.Realtime.Player previousTaggedPlayer = null; // Bir önceki turda taglenen kişi
     public Dictionary<Photon.Realtime.Player, bool> sobelenemezler = new Dictionary<Photon.Realtime.Player, bool>();
     public List<Photon.Realtime.Player> seenPlayers = new List<Photon.Realtime.Player>();
     public List<Photon.Realtime.Player> seekedPlayers = new List<Photon.Realtime.Player>();
@@ -20,18 +21,28 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Photon.Realtime.Player[] allPlayers;
     public GameTimer timer;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
-        else if (Instance != this)
+        else
         {
             Destroy(gameObject);
         }
+    }
 
-        DontDestroyOnLoad(gameObject);
+    // Önceki tagger'ı belirlemek için bir metot
+    public void SetPreviousTaggedPlayer(Photon.Realtime.Player player)
+    {
+        previousTaggedPlayer = player;
+    }
+
+    // Önceki tagger'ı almak için bir metot
+    public Photon.Realtime.Player GetPreviousTaggedPlayer()
+    {
+        return previousTaggedPlayer;
     }
 
     void Start()
@@ -79,71 +90,70 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     void Update()
-{
-    if (seekedPlayers.Count != 0 && !tourEnd)
     {
-        notificationList.Add($"{seekedPlayers[0].NickName} is SEEKER");
-        tourEnd = true;
-        PhotonView photonView = PhotonView.Get(this);
-        photonView.RPC("EndRound", RpcTarget.All);
-    }
-
-    // sobelenemezler listesinde olan oyuncuları seenPlayers'dan çıkart
-    List<Photon.Realtime.Player> removee = new List<Photon.Realtime.Player>();
-    foreach (Photon.Realtime.Player player in seenPlayers)
-    {
-        if (sobelenemezler.ContainsKey(player) && sobelenemezler[player])
+        if (seekedPlayers.Count != 0 && !tourEnd)
         {
-            removee.Add(player);
+            notificationList.Add($"{seekedPlayers[0].NickName} is SEEKER");
+            tourEnd = true;
+            PhotonView photonView = PhotonView.Get(this);
+            photonView.RPC("EndRound", RpcTarget.All);
         }
-    }
 
-    foreach (Photon.Realtime.Player playere in removee)
-    {
-        seenPlayers.Remove(playere);
-        Debug.Log($"{playere.NickName} removed from seenPlayers because they are sobelenemez.");
-    }
-
-}
-
-
-    private void AssignRoles()
-    {
-        Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
-        int randomIndex = Random.Range(0, players.Length);
-
-        players[randomIndex].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", EBE } });
-
-        for (int i = 0; i < players.Length; i++)
+        // sobelenemezler listesinde olan oyuncuları seenPlayers'dan çıkart
+        List<Photon.Realtime.Player> removee = new List<Photon.Realtime.Player>();
+        foreach (Photon.Realtime.Player player in seenPlayers)
         {
-            if (i != randomIndex)
+            if (sobelenemezler.ContainsKey(player) && sobelenemezler[player])
             {
-                players[i].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", HIDING } });
+                removee.Add(player);
             }
         }
 
-        Debug.Log("Roles assigned successfully!");
-
-        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        foreach (Photon.Realtime.Player playere in removee)
         {
-            if (GetPlayerRole(player) == EBE)
-            {
-                if (!seenPlayers.Contains(player))
-                {
-                    Debug.Log($"{player.NickName} is EBE and should not be added to seenPlayers.");
-                }
-            }
+            seenPlayers.Remove(playere);
+            Debug.Log($"{playere.NickName} removed from seenPlayers because they are sobelenemez.");
         }
 
-        foreach (Photon.Realtime.Player player in players)
-        {
-            if (GetPlayerRole(player) == EBE)
-            {
-                sobelenemezler[player] = true;
-                Debug.Log($"{player.NickName} is added to sobelenemezler.");
-            }
-        }
     }
+
+    // private void AssignRoles()
+    // {
+    //     Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
+    //     int randomIndex = Random.Range(0, players.Length);
+
+    //     players[randomIndex].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", EBE } });
+
+    //     for (int i = 0; i < players.Length; i++)
+    //     {
+    //         if (i != randomIndex)
+    //         {
+    //             players[i].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", HIDING } });
+    //         }
+    //     }
+
+    //     Debug.Log("Roles assigned successfully!");
+
+    //     foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+    //     {
+    //         if (GetPlayerRole(player) == EBE)
+    //         {
+    //             if (!seenPlayers.Contains(player))
+    //             {
+    //                 Debug.Log($"{player.NickName} is EBE and should not be added to seenPlayers.");
+    //             }
+    //         }
+    //     }
+
+    //     foreach (Photon.Realtime.Player player in players)
+    //     {
+    //         if (GetPlayerRole(player) == EBE)
+    //         {
+    //             sobelenemezler[player] = true;
+    //             Debug.Log($"{player.NickName} is added to sobelenemezler.");
+    //         }
+    //     }
+    // }
 
     public string GetPlayerRole(Photon.Realtime.Player player)
     {
@@ -169,19 +179,82 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (seekedPlayers.Count == (allPlayers.Length - 1) && seekedPlayers.Count != 0)
         {
             PhotonView photonView = PhotonView.Get(this);
-            photonView.RPC("EndRound", RpcTarget.All);
+            photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
+
+
         }
 
         if (timer != null && timer.timeLeft <= 0)
         {
             PhotonView photonView = PhotonView.Get(this);
-            photonView.RPC("EndRound", RpcTarget.All);
+            photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
+
+
         }
     }
 
     [PunRPC]
-    public void EndRound()
+    public void EndRound(string taggedPlayerName)
+    {
+        // Bir önceki ebe olarak taglenen oyuncuyu kaydet
+        previousTaggedPlayer = PhotonNetwork.PlayerList.FirstOrDefault(p => p.NickName == taggedPlayerName);
+
+        // Yeni sahneye geçiş
+        SceneManager.LoadScene("EndRoundScreen");
+    }
+
+    public void AssignRoles()
+    {
+        Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
+        int ebeIndex = -1;
+
+        // Bir önceki taglenen oyuncuyu bul
+        if (previousTaggedPlayer != null)
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i] == previousTaggedPlayer)
+                {
+                    ebeIndex = i;
+                    break;
+                }
+            }
+        }
+
+        // Eğer previousTaggedPlayer yoksa rastgele bir ebe seç
+        if (ebeIndex == -1)
+        {
+            ebeIndex = Random.Range(0, players.Length);
+        }
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (i == ebeIndex)
+            {
+                players[i].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", EBE } });
+                Debug.Log($"{players[i].NickName} is the new EBE.");
+            }
+            else
+            {
+                players[i].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", HIDING } });
+            }
+        }
+
+        // Güncellenen sobelenemez listesi
+        sobelenemezler.Clear();
+        foreach (Photon.Realtime.Player player in players)
+        {
+            if (GetPlayerRole(player) == EBE)
+            {
+                sobelenemezler[player] = true;
+                Debug.Log($"{player.NickName} added to sobelenemezler.");
+            }
+        }
+    }
+
+    private void LoadEndRoundScene()
     {
         SceneManager.LoadScene("EndRoundScreen");
     }
+
 }

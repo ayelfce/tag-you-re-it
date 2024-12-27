@@ -8,7 +8,7 @@ public class TagArea : MonoBehaviourPunCallbacks
 {
     private const string EBE_ROLE = "EBE";
     private const string SobelenemezProperty = "Sobelenemez";
-    
+
     private Photon.Realtime.Player sobeci;
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +25,7 @@ public class TagArea : MonoBehaviourPunCallbacks
                     if (playerRole.ToString() == EBE_ROLE)
                     {
                         Debug.Log("Ebe alana girdi: " + otherPhotonView.Owner.NickName);
-                        
+
                         // Ebe alanına girdiğinde, seenPlayers listesinde yer alan oyuncuları kontrol et
                         foreach (var player in GameManager.Instance.seenPlayers)
                         {
@@ -36,7 +36,11 @@ public class TagArea : MonoBehaviourPunCallbacks
                                 {
                                     Debug.Log("Game Over: " + player.NickName + " has been tagged by EBE!");
                                     PhotonView photonView = PhotonView.Get(GameManager.Instance);
-                                    photonView.RPC("EndRound", RpcTarget.All); // Oyunu bitir
+                                    GameManager.Instance.SetPreviousTaggedPlayer(player);
+
+
+                                    photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
+
                                     return;
                                 }
                             }

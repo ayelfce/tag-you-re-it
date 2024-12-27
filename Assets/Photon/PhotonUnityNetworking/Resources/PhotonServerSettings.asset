@@ -51,6 +51,10 @@ MonoBehaviour:
   - ShowEbeScreen
   - EndRound
   - OnEbeEnter
+  - LoadNewGameScene
+  - ContinueGame
+  - EndGameButton
+  - StartNewGame
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
