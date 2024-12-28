@@ -5,6 +5,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using ExitGames.Client.Photon.StructWrapping;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -18,7 +20,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     public List<Photon.Realtime.Player> seekedPlayers = new List<Photon.Realtime.Player>();
     public List<string> notificationList = new List<string>();
     private bool tourEnd = false;
+    public Photon.Realtime.Player ebemiz = null;
     public Photon.Realtime.Player[] allPlayers;
+    public List<Photon.Realtime.Player> remainers = new List<Photon.Realtime.Player>();
     public GameTimer timer;
 
     private void Awake()
@@ -73,10 +77,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
 
         allPlayers = PhotonNetwork.PlayerList;
-
+        remainers.Clear();
         foreach (Photon.Realtime.Player p in allPlayers)
         {
             Debug.Log("Oyuncu: " + p.NickName);
+            if (GetPlayerRole(p) != EBE)
+            {
+                remainers.Add(p);
+            }
         }
 
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
@@ -91,12 +99,39 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        
         if (seekedPlayers.Count != 0 && !tourEnd)
         {
             notificationList.Add($"Game Over: {seekedPlayers[0].NickName} is SEEKER");
+            ebemiz = seekedPlayers[0];
             tourEnd = true;
-            PhotonView photonView = PhotonView.Get(this);
-            photonView.RPC("EndRound", RpcTarget.All);
+            //PhotonView photonView = PhotonView.Get(this);
+            //photonView.RPC("EndRoundS", ebemiz);
+        }
+
+        if(remainers.Count() == 0 && !tourEnd)
+        {
+            foreach (Photon.Realtime.Player player in allPlayers)
+            {
+                object playerRol;
+                player.CustomProperties.TryGetValue("Role", out playerRol);
+                if (playerRol.ToString() == "EBE")
+                {
+                    ebemiz = player;
+                    tourEnd = true;
+                    //PhotonView photonView = PhotonView.Get(this);
+                    //photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
+
+                }
+
+
+            }
+        }
+        if (tourEnd)
+        {
+            Debug.Log("Tour Ends");
+            photonView.RPC("EndRoundS", RpcTarget.All);
+
         }
 
         // sobelenemezler listesinde olan oyuncuları seenPlayers'dan çıkart
@@ -176,32 +211,54 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void OtherEndings()
     {
-        if (seekedPlayers.Count == (allPlayers.Length - 1) && seekedPlayers.Count != 0)
-        {
-            PhotonView photonView = PhotonView.Get(this);
-            photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
+        //if (seekedPlayers.Count == (allPlayers.Length - 1) && seekedPlayers.Count != 0)
+        //{
+        //    PhotonView photonView = PhotonView.Get(this);
+        //    photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
 
 
-        }
+        //}
 
         if (timer != null && timer.timeLeft <= 0)
         {
-            PhotonView photonView = PhotonView.Get(this);
-            photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
+            foreach (Photon.Realtime.Player player in allPlayers)
+            {
+                object playerRol;
+                player.CustomProperties.TryGetValue("Role", out playerRol);
+                if (playerRol.ToString() == "EBE")
+                {
+                    ebemiz = player;
+                    tourEnd = true;
+                    //PhotonView photonView = PhotonView.Get(this);
+                    //photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
+
+                }
 
 
+            }
         }
     }
 
     [PunRPC]
-    public void EndRound(string taggedPlayerName)
+    public void EndRoundS()
     {
+        Debug.Log("End Round Came");
         // Bir önceki ebe olarak taglenen oyuncuyu kaydet
-        previousTaggedPlayer = PhotonNetwork.PlayerList.FirstOrDefault(p => p.NickName == taggedPlayerName);
+        SceneManager.LoadScene("EndRoundScreen");
+        EndRoundScreen.Instance.ebemiss = ebemiz;
 
         // Yeni sahneye geçiş
-        SceneManager.LoadScene("EndRoundScreen");
+        
     }
+
+    //public void EndRound(string taggedPlayerName)
+    //{
+    //    // Bir önceki ebe olarak taglenen oyuncuyu kaydet
+    //    previousTaggedPlayer = PhotonNetwork.PlayerList.FirstOrDefault(p => p.NickName == taggedPlayerName);
+
+    //    // Yeni sahneye geçiş
+    //    SceneManager.LoadScene("EndRoundScreen");
+    //}
 
     public void AssignRoles()
     {

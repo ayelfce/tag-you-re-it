@@ -5,18 +5,21 @@ using UnityEngine.UI;
 
 public class EndRoundScreen : MonoBehaviour
 {
+    public static EndRoundScreen Instance { get; private set; }
     public TextMeshProUGUI previousTaggedPlayerText;
+    public Photon.Realtime.Player ebemiss;
 
     // Start() veya uygun bir metodda RPC çağrısını tetikleyebilirsiniz
     void Start()
     {
+        ebemiss  = GameManager.Instance.ebemiz;
         // GameManager'dan önceki tagger'ı al
         Photon.Realtime.Player previousTagger = GameManager.Instance.GetPreviousTaggedPlayer();
 
-        if (previousTagger != null)
+        if (ebemiss != null)
         {
             // Eğer bir önceki ebe varsa, ismimi Text'e yerleştir
-            previousTaggedPlayerText.text = "New SEEKER for the next round: " + previousTagger.NickName;
+            previousTaggedPlayerText.text = "New SEEKER for the next round: " + ebemiss.NickName;
         }
         else
         {
@@ -25,7 +28,7 @@ public class EndRoundScreen : MonoBehaviour
         }
 
         // EndRound sonrası, RPC çağırarak önceki tagger'ı tüm oyunculara gönder
-        GameManager.Instance.GetPreviousTaggedPlayer();
+        //GameManager.Instance.GetPreviousTaggedPlayer();
     }
 
     // EndRound ekranında oyunu başlatma butonu

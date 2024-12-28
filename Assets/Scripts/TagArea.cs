@@ -40,10 +40,15 @@ public class TagArea : MonoBehaviourPunCallbacks
                     {
                         //List<Photon.Realtime.Player> removeList = new List<Photon.Realtime.Player>();
                         Debug.Log("Ebe olmayan oyuncu alana girdi: " + otherPhotonView.Owner.NickName);
-                        GameManager.Instance.sobelenemezler.Add(otherPhotonView.Owner);
                         
-                        Debug.Log("SOBE, artık sobelenemez: " + otherPhotonView.Owner.NickName);
-                        GameManager.Instance.notificationList.Add($"SOBE, artık sobelenemez:  + {otherPhotonView.Owner.NickName}");
+                        if (!GameManager.Instance.sobelenemezler.Contains(otherPhotonView.Owner))
+                        {
+                            GameManager.Instance.sobelenemezler.Add(otherPhotonView.Owner);
+                            Debug.Log("SOBE, artık sobelenemez: " + otherPhotonView.Owner.NickName);
+                            GameManager.Instance.remainers.Remove(otherPhotonView.Owner);
+                            GameManager.Instance.notificationList.Add($"SOBE, artık sobelenemez: {otherPhotonView.Owner.NickName}");
+
+                        }
 
                         //foreach (Photon.Realtime.Player player in GameManager.Instance.seenPlayers)
                         //{
