@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public List<Photon.Realtime.Player> seenPlayers = new List<Photon.Realtime.Player>();
     public List<Photon.Realtime.Player> seekedPlayers = new List<Photon.Realtime.Player>();
     public List<string> notificationList = new List<string>();
-    private bool tourEnd = false;
+    public bool tourEnd = false;
     public Photon.Realtime.Player ebemiz = null;
     public Photon.Realtime.Player[] allPlayers;
     public List<Photon.Realtime.Player> remainers = new List<Photon.Realtime.Player>();
@@ -211,35 +211,35 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void OtherEndings()
-    {
-        //if (seekedPlayers.Count == (allPlayers.Length - 1) && seekedPlayers.Count != 0)
-        //{
-        //    PhotonView photonView = PhotonView.Get(this);
-        //    photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
+    //public void OtherEndings()
+    //{
+    //    //if (seekedPlayers.Count == (allPlayers.Length - 1) && seekedPlayers.Count != 0)
+    //    //{
+    //    //    PhotonView photonView = PhotonView.Get(this);
+    //    //    photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
 
 
-        //}
+    //    //}
 
-        if (timer != null && timer.timeLeft <= 0)
-        {
-            foreach (Photon.Realtime.Player player in allPlayers)
-            {
-                object playerRol;
-                player.CustomProperties.TryGetValue("Role", out playerRol);
-                if (playerRol.ToString() == "EBE")
-                {
-                    ebemiz = player;
-                    tourEnd = true;
-                    //PhotonView photonView = PhotonView.Get(this);
-                    //photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
+    //    if (timer != null && timer.timeLeft <= 0)
+    //    {
+    //        foreach (Photon.Realtime.Player player in allPlayers)
+    //        {
+    //            object playerRol;
+    //            player.CustomProperties.TryGetValue("Role", out playerRol);
+    //            if (playerRol.ToString() == "EBE")
+    //            {
+    //                ebemiz = player;
+    //                tourEnd = true;
+    //                //PhotonView photonView = PhotonView.Get(this);
+    //                //photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
 
-                }
+    //            }
 
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 
     private IEnumerator CheckCustomPropertiesAndProceed()
     {

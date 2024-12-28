@@ -28,8 +28,21 @@ public class GameTimer : MonoBehaviour
             {
                 timerIsRunning = false;
                 countdownText.text = "Time's Up!";
-                PhotonView photonView = PhotonView.Get(GameManager.Instance);
-                photonView.RPC("EndRound", RpcTarget.All);
+                GameManager.Instance.tourEnd = true;
+                foreach (Photon.Realtime.Player player in GameManager.Instance.allPlayers)
+                {
+                    object playerRol;
+                    player.CustomProperties.TryGetValue("Role", out playerRol);
+                    if (playerRol.ToString() == "EBE")
+                    {
+                        GameManager.Instance.ebemiz = player;
+
+                    }
+
+
+                }
+                //PhotonView photonView = PhotonView.Get(GameManager.Instance);
+                //photonView.RPC("EndRound", RpcTarget.All);
             }
         }
     }
