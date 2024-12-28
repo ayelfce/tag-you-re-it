@@ -11,6 +11,15 @@ public class TagArea : MonoBehaviourPunCallbacks
 
     private Photon.Realtime.Player sobeci;
 
+    private void Start()
+    {
+        // Başlangıçta trigger'ı kapalı yapıyoruz
+        Collider collider = GetComponent<Collider>();
+        collider.isTrigger = false;
+        Debug.Log("Collider başlangıçta isTrigger: " + collider.isTrigger);
+        StartCoroutine(EnableTriggerAfterDelay(20f));
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         PhotonView otherPhotonView = other.GetComponent<PhotonView>();
@@ -34,11 +43,9 @@ public class TagArea : MonoBehaviourPunCallbacks
                                 GameManager.Instance.seekedPlayers.Add(player);
                             }
                         }
-                        //photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
                     }
                     else
                     {
-                        //List<Photon.Realtime.Player> removeList = new List<Photon.Realtime.Player>();
                         Debug.Log("Ebe olmayan oyuncu alana girdi: " + otherPhotonView.Owner.NickName);
                         
                         if (!GameManager.Instance.sobelenemezler.Contains(otherPhotonView.Owner))
@@ -47,24 +54,9 @@ public class TagArea : MonoBehaviourPunCallbacks
                             Debug.Log("SOBE, artık sobelenemez: " + otherPhotonView.Owner.NickName);
                             GameManager.Instance.remainers.Remove(otherPhotonView.Owner);
                             GameManager.Instance.notificationList.Add($"SOBE, artık sobelenemez: {otherPhotonView.Owner.NickName}");
-
                         }
-
-                        //foreach (Photon.Realtime.Player player in GameManager.Instance.seenPlayers)
-                        //{
-                        //    object playerRoleForSeenPlayer;
-                        //    if (player.CustomProperties.TryGetValue("Role", out playerRoleForSeenPlayer))
-                        //    {
-                        //        if (playerRoleForSeenPlayer.ToString() != EBE_ROLE && !GetSobelenemezProperty(player))
-                        //        {
-                        //            removeList.Add(player);
-                        //            GameManager.Instance.seekedPlayers.Add(player);
-                        //            GameManager.Instance.notificationList.Add($"{player.NickName} is seeked.");
-                        //            SetSobelenemezProperty(player, true);
-                        //        }
-                        //    }
-                        //}
                     }
+                    
                 }
                 else
                 {
@@ -72,6 +64,16 @@ public class TagArea : MonoBehaviourPunCallbacks
                 }
             }
         }
+    }
+
+    private IEnumerator EnableTriggerAfterDelay(float delay)
+    {
+        Debug.Log("Coroutine başladı, " + delay + " saniye bekleniyor...");
+        yield return new WaitForSeconds(delay);
+
+        Collider collider = GetComponent<Collider>();
+        collider.isTrigger = true;
+        Debug.Log("20 saniye sonra isTrigger özelliği: " + collider.isTrigger);
     }
 
     public bool GetSobelenemezProperty(Photon.Realtime.Player player)

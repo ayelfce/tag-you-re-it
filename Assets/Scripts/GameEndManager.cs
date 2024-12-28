@@ -1,6 +1,7 @@
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndRoundScreen : MonoBehaviourPun
 {
@@ -36,6 +37,11 @@ public class EndRoundScreen : MonoBehaviourPun
         {
             previousTaggedPlayerText.text = "No previous tagger.";
         }
+    }
+
+    public void OnLeaveRoomButtonClicked() {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void OnContinueButtonClicked()

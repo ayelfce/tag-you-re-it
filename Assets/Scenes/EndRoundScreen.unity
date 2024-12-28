@@ -1074,7 +1074,7 @@ GameObject:
   - component: {fileID: 1897548459}
   - component: {fileID: 1897548458}
   m_Layer: 5
-  m_Name: _endGameButton
+  m_Name: _leaveRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1145,8 +1145,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 509950268}
-        m_TargetAssemblyTypeName: GameEndManager, Assembly-CSharp
-        m_MethodName: OnEndGameButtonClicked
+        m_TargetAssemblyTypeName: EndRoundScreen, Assembly-CSharp
+        m_MethodName: OnLeaveRoomButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
