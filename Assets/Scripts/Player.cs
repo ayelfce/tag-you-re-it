@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private float gravity = -9.81f;
     public PhotonView view;
-    [SerializeField] private TextMeshPro usernameText;
+    [SerializeField] private TextMeshProUGUI usernameText;
     private Vector3 velocity;
     private float turnSmoothVelocity;
     public bool sobelenemez = false;
