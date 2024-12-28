@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        
+
         if (seekedPlayers.Count != 0 && !tourEnd)
         {
             notificationList.Add($"Game Over: {seekedPlayers[0].NickName} is SEEKER");
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             //photonView.RPC("EndRoundS", ebemiz);
         }
 
-        if(remainers.Count() == 0 && !tourEnd)
+        if (remainers.Count() == 0 && !tourEnd)
         {
             foreach (Photon.Realtime.Player player in allPlayers)
             {
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             Debug.Log("Tour Ends");
             PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "NewEbe", ebemiz.NickName } });
             StartCoroutine(CheckCustomPropertiesAndProceed());
-            
+
 
         }
 
@@ -277,7 +277,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     //    //EndRoundScreen.Instance.ebemiss = ebemiz;
 
     //    // Yeni sahneye geçiş
-        
+
     //}
 
     //public void EndRound(string taggedPlayerName)
@@ -341,6 +341,34 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void LoadEndRoundScene()
     {
         SceneManager.LoadScene("EndRoundScreen");
+    }
+
+    [PunRPC]
+    public void ResetTimer()
+    {
+        if (timer != null)
+        {
+            timer.ResetTimer(); // Timer sınıfında bir ResetTimer metodu olmalı
+            Debug.Log("Timer sıfırlandı.");
+        }
+        else
+        {
+            Debug.LogWarning("Timer bulunamadı, sıfırlama başarısız.");
+        }
+    }
+
+    [PunRPC]
+    public void ResetSeenList()
+    {
+        if (seenPlayers != null)
+        {
+            seenPlayers.Clear();
+            Debug.Log("Görülen oyuncu listesi sıfırlandı.");
+        }
+        else
+        {
+            Debug.LogWarning("Görülen oyuncu listesi null, sıfırlama başarısız.");
+        }
     }
 
 }

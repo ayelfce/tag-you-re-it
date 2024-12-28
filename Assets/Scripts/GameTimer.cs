@@ -41,4 +41,11 @@ public class GameTimer : MonoBehaviour
         int seconds = Mathf.FloorToInt(time % 60);
         countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
+    [PunRPC]
+    public void ResetTimer()
+    {
+        timeLeft = 120f; // Başlangıç zamanına sıfırlar
+        Debug.Log("Timer sıfırlandı.");
+    }
 }

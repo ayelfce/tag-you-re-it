@@ -58,6 +58,9 @@ MonoBehaviour:
   - ShowNotificationOnAllClients
   - UpdateNotificationList
   - EndRoundS
+  - ResetGameState
+  - ResetSeenList
+  - ResetTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

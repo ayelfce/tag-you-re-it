@@ -1,80 +1,103 @@
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class EndRoundScreen : MonoBehaviour
+public class EndRoundScreen : MonoBehaviourPun
 {
     public static EndRoundScreen Instance { get; private set; }
     public TextMeshProUGUI previousTaggedPlayerText;
-    public Photon.Realtime.Player ebemiss1, ebemiss;
+    public Photon.Realtime.Player ebemiss;
 
-    // Start() veya uygun bir metodda RPC çağrısını tetikleyebilirsiniz
     void Start()
     {
-        //PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "NewEbe", GameManager.Instance.ebemiz.NickName } });
+        // "NewEbe" bilgisi odadan alınır
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("NewEbe", out object ebeNick))
         {
-            foreach(Photon.Realtime.Player ebe in GameManager.Instance.allPlayers)
+            foreach (Photon.Realtime.Player ebe in GameManager.Instance.allPlayers)
             {
-                if(ebe.NickName == (string)ebeNick)
+                if (ebe.NickName == (string)ebeNick)
                 {
                     ebemiss = ebe;
                     Debug.Log($"Ebemiz: {ebemiss.NickName}");
+                    break;
                 }
-            } // Tür dönüşümünü yapın
+            }
         }
         else
         {
             Debug.Log("NewEbe not found in room properties.");
         }
 
-        // GameManager'dan önceki tagger'ı al
-        //Photon.Realtime.Player previousTagger = GameManager.Instance.GetPreviousTaggedPlayer();
-
         if (ebemiss != null)
         {
-            // Eğer bir önceki ebe varsa, ismimi Text'e yerleştir
             previousTaggedPlayerText.text = "New SEEKER for the next round: " + ebemiss.NickName;
         }
         else
         {
-            // Eğer önceki tagger yoksa
             previousTaggedPlayerText.text = "No previous tagger.";
         }
-
-        // EndRound sonrası, RPC çağırarak önceki tagger'ı tüm oyunculara gönder
-        //GameManager.Instance.GetPreviousTaggedPlayer();
     }
 
-    // EndRound ekranında oyunu başlatma butonu
     public void OnContinueButtonClicked()
     {
-        // Yeni oyunda önceki tagger'ı yeni ebe olarak ayarlayabilirsiniz
-        Photon.Realtime.Player newTagger = GameManager.Instance.GetPreviousTaggedPlayer();
-        if (newTagger != null)
+        // Sadece master client oyun başlatabilir
+        if (PhotonNetwork.IsMasterClient)
         {
-            StartNewGameWithNewTagger(newTagger);
+            Debug.Log("Master client is starting the game.");
+
+            // Yeni ebe belirlenir ve oyun başlatma sinyali gönderilir
+            if (ebemiss != null)
+            {
+                photonView.RPC("StartNewGame", RpcTarget.All, ebemiss.NickName);
+            }
+            else
+            {
+                Photon.Realtime.Player randomTagger = PhotonNetwork.PlayerList[Random.Range(0, PhotonNetwork.PlayerList.Length)];
+                photonView.RPC("StartNewGame", RpcTarget.All, randomTagger.NickName);
+            }
         }
         else
         {
-            StartNewGameWithRandomTagger();
+            Debug.LogWarning("Only the master client can start the game.");
         }
     }
 
-    // Yeni oyun başlatma fonksiyonu (eğer önceki ebe varsa)
-    void StartNewGameWithNewTagger(Photon.Realtime.Player newTagger)
+    [PunRPC]
+    void StartNewGame(string taggerNickName)
     {
-        Debug.Log("Starting new game with tagger: " + newTagger.NickName);
-        // Burada yeni oyun başlatılacak ve yeni ebe atanacak
+        Debug.Log($"Starting new game. Seeker is: {taggerNickName}");
+
+        // Yeni ebe ayarlanır
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            if (player.NickName == taggerNickName)
+            {
+                var properties = player.CustomProperties;
+                properties["Role"] = "EBE";
+                player.SetCustomProperties(properties);
+            }
+            else {
+                var properties = player.CustomProperties;
+                properties["Role"] = "Hiding";
+                player.SetCustomProperties(properties);
+            }
+        }
+
+        // Oyun değişkenleri sıfırlanır
+        ResetGameState();
+
+        // Yeni oyun sahnesi yüklenir
+        PhotonNetwork.LoadLevel("GameScene");
     }
 
-    // Rastgele bir tagger seçme (eğer önceki tagger yoksa)
-    void StartNewGameWithRandomTagger()
+    void ResetGameState()
     {
-        Photon.Realtime.Player randomTagger = PhotonNetwork.PlayerList[Random.Range(0, PhotonNetwork.PlayerList.Length)];
-        Debug.Log("Starting new game with random tagger: " + randomTagger.NickName);
-        // Burada rastgele yeni ebe atanacak
-    }
+        // Timer sıfırlanır
+        GameManager.Instance.ResetTimer();
 
+        // Görülen oyuncular listesi sıfırlanır
+        GameManager.Instance.ResetSeenList();
+
+        Debug.Log("Game state has been reset.");
+    }
 }
