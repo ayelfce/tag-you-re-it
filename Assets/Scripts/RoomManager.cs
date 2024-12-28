@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
@@ -12,20 +11,19 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public TMP_InputField username;
     public TextMeshProUGUI warningText;
     public byte maxPlayers = 4;
-
-    // Oyun başlatma için kullanılacak buton
     public GameObject startButton;
 
     private void Start()
     {
-        // Eğer bağlanmamışsak, bağlanmaya çalış
+        // bağlantı kontrolü
         if (!PhotonNetwork.IsConnected)
         {
             PhotonNetwork.ConnectUsingSettings();
         }
     }
 
-    public void GoBackButton() {
+    public void GoBackButton()
+    {
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -34,17 +32,16 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // Kullanıcı adı ve oda adı kontrolü
         if (string.IsNullOrWhiteSpace(username.text))
         {
-            ShowWarning("Lütfen bir kullanıcı adı girin.");
+            ShowWarning("Please enter a username.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(roomName.text))
         {
-            ShowWarning("Lütfen bir oda adı girin.");
+            ShowWarning("Please enter a room name.");
             return;
         }
 
-        // Kullanıcı adı ayarla
         PhotonNetwork.NickName = username.text;
 
         // Odayı yaratmak için önce Master Server'a bağlanmış olmalısınız
@@ -56,10 +53,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            ShowWarning("Bağlantı hatası!");
+            ShowWarning("Connection error!");
         }
-
-        //PhotonNetwork.LoadLevel("LobbyScene");
     }
 
 
@@ -71,10 +66,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         // Odaya başarıyla katıldığınızda bu metot çağrılır
-        Debug.Log("Odaya katıldım: " + PhotonNetwork.CurrentRoom.Name);
+        Debug.Log("Joined to room: " + PhotonNetwork.CurrentRoom.Name);
         PhotonNetwork.LoadLevel("LobbyScene");
     }
-
 
     private void ShowWarning(string message)
     {

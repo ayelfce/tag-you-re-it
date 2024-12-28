@@ -1,27 +1,26 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 using TMPro;
 using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
-    public TMP_Text roomNameText; // Odanın adı için metin
-    public TMP_Text playerListText; // Oyuncu listesi için metin
-    public GameObject startButton; // Oyun başlatma butonu (herkeste görünür olacak)
+    public TMP_Text roomNameText;
+    public TMP_Text playerListText;
+    public GameObject startButton;
 
     private void Start()
     {
         // Odaya katılma işlemi başarılı olduğunda bu method çağrılır
-        roomNameText.text = "Room: " + PhotonNetwork.CurrentRoom.Name; // Oda adını ekrana yazdır
+        roomNameText.text = "\nRoom: " + PhotonNetwork.CurrentRoom.Name;
 
         UpdatePlayerList(); // Oyuncu listesini güncelle
         StartCoroutine(UpdatePlayerListPeriodically()); // Oyuncu listesini periyodik olarak güncelle
     }
 
-    public void LeaveRoomButton() {
+    public void LeaveRoomButton()
+    {
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }
@@ -61,7 +60,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("Only the MasterClient can start the game.");
         }
-        
+
     }
 
     // RPC metodu, tüm oyunculara sahne yüklenmesini iletir
@@ -69,10 +68,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private void LoadGameScene()
     {
         Debug.Log("Loading game scene for all players...");
-        PhotonNetwork.LoadLevel("GameScene"); // Burada sahne yükleniyor
+        PhotonNetwork.LoadLevel("GameScene");
     }
 
-    // Oyun başladığında, MasterClient dışında her oyuncu sahneye yüklenecek
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();

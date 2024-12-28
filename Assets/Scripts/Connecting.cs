@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
@@ -11,7 +9,8 @@ public class Connecting : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    public override void OnConnectedToMaster() {
+    public override void OnConnectedToMaster()
+    {
         Debug.Log("Connected");
         SceneManager.LoadScene("MainMenu");
     }

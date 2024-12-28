@@ -19,7 +19,7 @@ public class EndRoundScreen : MonoBehaviourPun
                 if (ebe.NickName == (string)ebeNick)
                 {
                     ebemiss = ebe;
-                    Debug.Log($"Ebemiz: {ebemiss.NickName}");
+                    Debug.Log($"Seeker: {ebemiss.NickName}");
                     break;
                 }
             }
@@ -39,7 +39,8 @@ public class EndRoundScreen : MonoBehaviourPun
         }
     }
 
-    public void OnLeaveRoomButtonClicked() {
+    public void OnLeaveRoomButtonClicked()
+    {
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }
@@ -82,7 +83,8 @@ public class EndRoundScreen : MonoBehaviourPun
                 properties["Role"] = "EBE";
                 player.SetCustomProperties(properties);
             }
-            else {
+            else
+            {
                 var properties = player.CustomProperties;
                 properties["Role"] = "Hiding";
                 player.SetCustomProperties(properties);

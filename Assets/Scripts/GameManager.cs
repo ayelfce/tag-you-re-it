@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using System.Linq;
-using ExitGames.Client.Photon.StructWrapping;
-using Unity.VisualScripting;
-using ExitGames.Client.Photon;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -56,7 +52,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         remainers.Clear();
         foreach (Photon.Realtime.Player p in allPlayers)
         {
-            Debug.Log("Oyuncu remainerse eklendi: " + p.NickName);
+            Debug.Log("Player added to remainers: " + p.NickName);
             remainers.Add(p);
         }
 
@@ -85,9 +81,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             AssignRoles();
         }
 
-        
-        
-
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
             if (GetPlayerRole(player) == EBE)
@@ -106,8 +99,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             notificationList.Add($"Game Over: {seekedPlayers[0].NickName} is SEEKER");
             ebemiz = seekedPlayers[0];
             tourEnd = true;
-            //PhotonView photonView = PhotonView.Get(this);
-            //photonView.RPC("EndRoundS", ebemiz);
         }
 
         if (remainers.Count() == 0 && !tourEnd)
@@ -120,12 +111,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 {
                     ebemiz = player;
                     tourEnd = true;
-                    //PhotonView photonView = PhotonView.Get(this);
-                    //photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
-
                 }
-
-
             }
         }
         if (tourEnd)
@@ -133,8 +119,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             Debug.Log("Tour Ends");
             PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "NewEbe", ebemiz.NickName } });
             StartCoroutine(CheckCustomPropertiesAndProceed());
-
-
         }
 
         // sobelenemezler listesinde olan oyuncuları seenPlayers'dan çıkart
@@ -155,44 +139,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     }
 
-    // private void AssignRoles()
-    // {
-    //     Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
-    //     int randomIndex = Random.Range(0, players.Length);
-
-    //     players[randomIndex].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", EBE } });
-
-    //     for (int i = 0; i < players.Length; i++)
-    //     {
-    //         if (i != randomIndex)
-    //         {
-    //             players[i].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", HIDING } });
-    //         }
-    //     }
-
-    //     Debug.Log("Roles assigned successfully!");
-
-    //     foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
-    //     {
-    //         if (GetPlayerRole(player) == EBE)
-    //         {
-    //             if (!seenPlayers.Contains(player))
-    //             {
-    //                 Debug.Log($"{player.NickName} is EBE and should not be added to seenPlayers.");
-    //             }
-    //         }
-    //     }
-
-    //     foreach (Photon.Realtime.Player player in players)
-    //     {
-    //         if (GetPlayerRole(player) == EBE)
-    //         {
-    //             sobelenemezler[player] = true;
-    //             Debug.Log($"{player.NickName} is added to sobelenemezler.");
-    //         }
-    //     }
-    // }
-
     public string GetPlayerRole(Photon.Realtime.Player player)
     {
         if (player.CustomProperties.TryGetValue(RoleProperty, out object role))
@@ -211,36 +157,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             roleBasedUI.gameObject.SetActive(true);
         }
     }
-
-    //public void OtherEndings()
-    //{
-    //    //if (seekedPlayers.Count == (allPlayers.Length - 1) && seekedPlayers.Count != 0)
-    //    //{
-    //    //    PhotonView photonView = PhotonView.Get(this);
-    //    //    photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
-
-
-    //    //}
-
-    //    if (timer != null && timer.timeLeft <= 0)
-    //    {
-    //        foreach (Photon.Realtime.Player player in allPlayers)
-    //        {
-    //            object playerRol;
-    //            player.CustomProperties.TryGetValue("Role", out playerRol);
-    //            if (playerRol.ToString() == "EBE")
-    //            {
-    //                ebemiz = player;
-    //                tourEnd = true;
-    //                //PhotonView photonView = PhotonView.Get(this);
-    //                //photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
-
-    //            }
-
-
-    //        }
-    //    }
-    //}
 
     private IEnumerator CheckCustomPropertiesAndProceed()
     {
@@ -263,32 +179,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void EndRoundS()
     {
         Debug.Log("End Round Came");
-
-        //PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "NewEbe", ebemiz.NickName } });
-
-        // Yeni sahneye geçiş
         SceneManager.LoadScene("EndRoundScreen");
     }
-
-    //public void EndRoundS()
-    //{
-    //    Debug.Log("End Round Came");
-    //    // Bir önceki ebe olarak taglenen oyuncuyu kaydet
-    //    SceneManager.LoadScene("EndRoundScreen");
-    //    //EndRoundScreen.Instance.ebemiss = ebemiz;
-
-    //    // Yeni sahneye geçiş
-
-    //}
-
-    //public void EndRound(string taggedPlayerName)
-    //{
-    //    // Bir önceki ebe olarak taglenen oyuncuyu kaydet
-    //    previousTaggedPlayer = PhotonNetwork.PlayerList.FirstOrDefault(p => p.NickName == taggedPlayerName);
-
-    //    // Yeni sahneye geçiş
-    //    SceneManager.LoadScene("EndRoundScreen");
-    //}
 
     public void AssignRoles()
     {
@@ -349,12 +241,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (timer != null)
         {
-            timer.ResetTimer(); // Timer sınıfında bir ResetTimer metodu olmalı
-            Debug.Log("Timer sıfırlandı.");
+            timer.ResetTimer();
+            Debug.Log("Timer reset.");
         }
         else
         {
-            Debug.LogWarning("Timer bulunamadı, sıfırlama başarısız.");
+            Debug.LogWarning("Timer reset is unsuccessful.");
         }
     }
 

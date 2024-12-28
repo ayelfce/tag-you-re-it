@@ -1,7 +1,6 @@
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class GameTimer : MonoBehaviour
     [PunRPC]
     public void StartTimer()
     {
-        timerIsRunning = true;  // Timer'ı başlat
+        timerIsRunning = true;
     }
 
     void Update()
@@ -38,11 +37,7 @@ public class GameTimer : MonoBehaviour
                         GameManager.Instance.ebemiz = player;
 
                     }
-
-
                 }
-                //PhotonView photonView = PhotonView.Get(GameManager.Instance);
-                //photonView.RPC("EndRound", RpcTarget.All);
             }
         }
     }
@@ -59,6 +54,6 @@ public class GameTimer : MonoBehaviour
     public void ResetTimer()
     {
         timeLeft = 120f; // Başlangıç zamanına sıfırlar
-        Debug.Log("Timer sıfırlandı.");
+        Debug.Log("Timer reset.");
     }
 }

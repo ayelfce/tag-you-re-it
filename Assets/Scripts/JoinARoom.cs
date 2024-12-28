@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 using TMPro;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +11,6 @@ public class JoinARoom : MonoBehaviourPunCallbacks
     public TextMeshProUGUI warningText;
     public byte maxPlayers = 4;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (!PhotonNetwork.IsConnected)
@@ -31,13 +28,13 @@ public class JoinARoom : MonoBehaviourPunCallbacks
     {
         if (string.IsNullOrWhiteSpace(username.text))
         {
-            ShowWarning("Lütfen bir kullanıcı adı girin.");
+            ShowWarning("Please enter a username.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(roomName.text))
         {
-            ShowWarning("Lütfen bir oda ad� girin.");
+            ShowWarning("Please enter a room name.");
             return;
         }
 
@@ -46,14 +43,12 @@ public class JoinARoom : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.JoinRoom(roomName.text);
-            Debug.Log("Katıldı.");
+            Debug.Log("Joined.");
         }
         else
         {
-            ShowWarning("Bağlantı Hatası!");
+            ShowWarning("Connection error!");
         }
-
-        //PhotonNetwork.LoadLevel("LobbyScene");
     }
 
     public override void OnConnectedToMaster()
@@ -68,7 +63,7 @@ public class JoinARoom : MonoBehaviourPunCallbacks
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log($"Odaya katılma başarısız: {message}");
+        Debug.Log($"Failed to join room: {message}");
         ShowWarning("Room does not exist.");
     }
 
@@ -77,7 +72,7 @@ public class JoinARoom : MonoBehaviourPunCallbacks
         warningText.gameObject.SetActive(true);
         warningText.text = message;
 
-        // 3 saniye sonra uyar�y� gizle
+        // 3 saniye sonra uyarıyı gizle
         StartCoroutine(HideWarning());
     }
 

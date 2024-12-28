@@ -2311,7 +2311,7 @@ Transform:
   m_GameObject: {fileID: 304988713}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 52.63294, y: -8.50256, z: -28.57458}
+  m_LocalPosition: {x: 47.83, y: -8.50256, z: -17.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4444,11 +4444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2e02a7307804dcfad2c6b4cebbcc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sobelenemezler: []
-  seenPlayers: []
-  seekedPlayers: []
   notificationList: []
-  allPlayers: []
+  tourEnd: 0
   timer: {fileID: 1020294537}
 --- !u!114 &581320050
 MonoBehaviour:
@@ -6877,6 +6874,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8090536354579408620, guid: 64ebb27bdc656473ca2c7b4fb171259d, type: 3}
   spawnPoint: {fileID: 304988714}
+  spawnRadius: 5
 --- !u!4 &952671452
 Transform:
   m_ObjectHideFlags: 0

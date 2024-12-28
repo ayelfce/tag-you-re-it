@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
-using ExitGames.Client.Photon;
 
 public class TagArea : MonoBehaviourPunCallbacks
 {
@@ -17,7 +14,7 @@ public class TagArea : MonoBehaviourPunCallbacks
         // Başlangıçta trigger'ı kapalı yapıyoruz
         Collider collider = GetComponent<Collider>();
         collider.isTrigger = false;
-        Debug.Log("Collider başlangıçta isTrigger: " + collider.isTrigger);
+        Debug.Log("Collider is isTrigger at the beginning: " + collider.isTrigger);
         StartCoroutine(EnableTriggerAfterDelay(20f));
     }
 
@@ -34,7 +31,7 @@ public class TagArea : MonoBehaviourPunCallbacks
                 {
                     if (playerRole.ToString() == EBE_ROLE)
                     {
-                        Debug.Log("Ebe alana girdi: " + otherPhotonView.Owner.NickName);
+                        Debug.Log("Seeker in in the tag area: " + otherPhotonView.Owner.NickName);
 
                         // Ebe alanına girdiğinde, seenPlayers listesinde yer alan oyuncuları kontrol et
                         foreach (var player in GameManager.Instance.seenPlayers)
@@ -47,21 +44,20 @@ public class TagArea : MonoBehaviourPunCallbacks
                     }
                     else
                     {
-                        Debug.Log("Ebe olmayan oyuncu alana girdi: " + otherPhotonView.Owner.NickName);
-                        
+                        Debug.Log("Non-seeker player is in the tag area: " + otherPhotonView.Owner.NickName);
+
                         if (!GameManager.Instance.sobelenemezler.Contains(otherPhotonView.Owner))
                         {
                             GameManager.Instance.sobelenemezler.Add(otherPhotonView.Owner);
-                            Debug.Log("SOBE, artık sobelenemez: " + otherPhotonView.Owner.NickName);
+                            Debug.Log("Tag, you're it!: " + otherPhotonView.Owner.NickName);
                             GameManager.Instance.remainers.Remove(otherPhotonView.Owner);
-                            GameManager.Instance.notificationList.Add($"SOBE, artık sobelenemez: {otherPhotonView.Owner.NickName}");
+                            GameManager.Instance.notificationList.Add($"Tag, you're it!: {otherPhotonView.Owner.NickName}");
                         }
                     }
-                    
                 }
                 else
                 {
-                    Debug.Log("Oyuncunun rolü bulunamadı.");
+                    Debug.Log("Player role cannot found.");
                 }
             }
         }
@@ -69,20 +65,21 @@ public class TagArea : MonoBehaviourPunCallbacks
 
     private IEnumerator EnableTriggerAfterDelay(float delay)
     {
-        Debug.Log("Coroutine başladı, " + delay + " saniye bekleniyor...");
+        Debug.Log("Coroutine started, " + delay + " waiting...");
         yield return new WaitForSeconds(delay);
 
         Collider collider = GetComponent<Collider>();
         collider.isTrigger = true;
-        Debug.Log("20 saniye sonra isTrigger özelliği: " + collider.isTrigger);
-        foreach (Photon.Realtime.Player item in GameManager.Instance.remainers)
+        Debug.Log("20 seconds later isTrigger property: " + collider.isTrigger);
+        for (int i = GameManager.Instance.remainers.Count - 1; i >= 0; i--)
         {
-            if(GameManager.Instance.GetPlayerRole(item) == "EBE")
+            Photon.Realtime.Player item = GameManager.Instance.remainers[i];
+            if (GameManager.Instance.GetPlayerRole(item) == "EBE")
             {
-                GameManager.Instance.remainers.Remove(item);
+                GameManager.Instance.remainers.RemoveAt(i);
             }
-            
         }
+
         Debug.Log("Remainers from 20sc");
         foreach (Photon.Realtime.Player item in GameManager.Instance.remainers)
         {

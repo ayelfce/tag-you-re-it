@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFollow : MonoBehaviour
@@ -11,12 +9,11 @@ public class PlayerFollow : MonoBehaviour
     [Range(0.01f, 1.0f)]
     public float SmoothFactor = 0.5f;
 
-    public float CameraPitch = 2.0f; // Kameranýn oyuncunun üstünde duracaðý mesafe
+    public float CameraPitch = 2.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
-        _cameraOffset = new Vector3(0, CameraPitch, -5f); // Kamerayý biraz yukarý ve arkaya konumlandýr
+        _cameraOffset = new Vector3(0, CameraPitch, -5f);
     }
 
     // LateUpdate is called after Update methods
@@ -25,16 +22,16 @@ public class PlayerFollow : MonoBehaviour
         if (PlayerTransform == null)
             return;
 
-        // Oyuncunun rotasyonuna göre kamerayý hareket ettir
+        // Oyuncunun rotasyonuna gÃ¶re kamerayÄ± hareket ettir
         Quaternion playerRotation = PlayerTransform.rotation;
         Vector3 rotatedOffset = playerRotation * _cameraOffset;
 
         Vector3 targetPosition = PlayerTransform.position + rotatedOffset;
 
-        // Kamerayý pürüzsüz bir þekilde yeni pozisyona taþý
+        // Kamerayï¿½ pï¿½rï¿½zsï¿½z bir ï¿½ekilde yeni pozisyona taï¿½ï¿½
         transform.position = Vector3.Slerp(transform.position, targetPosition, SmoothFactor);
 
-        // Kamerayý oyuncuya doðru döndür
+        // Kamerayï¿½ oyuncuya doï¿½ru dï¿½ndï¿½r
         transform.LookAt(PlayerTransform);
     }
 

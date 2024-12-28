@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 
 public class PlayerInteractable : MonoBehaviour
 {
@@ -19,18 +16,18 @@ public class PlayerInteractable : MonoBehaviour
         if (clickedPlayer != null)
         {
             string playerName = clickedPlayer.NickName;
-            Debug.Log($"Tıklanan oyuncu: {playerName}");
+            Debug.Log($"Clicked Player: {playerName}");
 
             // Ebe olan oyuncunun kendisine tıklanması durumunda işlemi engelle
             if (PhotonNetwork.LocalPlayer.CustomProperties["Role"]?.ToString() == "EBE")
             {
                 if (clickedPlayer == PhotonNetwork.LocalPlayer)
                 {
-                    Debug.Log("Ebe kendisine tıklayamaz!");
+                    Debug.Log("Seeker cannot clicked themself!");
                     return;  // Eğer tıklanan oyuncu Ebe ve kendisi ise, işlemi sonlandır
                 }
 
-                Debug.Log($"{playerName} isimli oyuncuya tıkladınız!");
+                Debug.Log($"You clicked to {playerName} !");
 
                 // Eğer tıklanan oyuncu sobelenemezler listesinde değilse ve seenPlayers listesinde değilse
                 if (!GameManager.Instance.sobelenemezler.Contains(clickedPlayer) &&
@@ -40,22 +37,22 @@ public class PlayerInteractable : MonoBehaviour
                     if (GameManager.Instance.GetPlayerRole(clickedPlayer) == "Hiding")
                     {
                         GameManager.Instance.seenPlayers.Add(clickedPlayer);
-                        Debug.Log($"{playerName} GameManager'daki seenPlayers listesine eklendi!");
+                        Debug.Log($"Added to {playerName} seenPlayers in GameManager");
 
-                        // Bu bildirimi tüm oyunculara göndereceğiz
+                        // Bu bildirimi tüm oyunculara gönder
                         PhotonView photonView = PhotonView.Get(this);
                         photonView.RPC("ShowNotificationOnAllClients", RpcTarget.All, $"{playerName} is seen!!!");
                     }
                 }
                 else
                 {
-                    Debug.Log($"{playerName} sobelenemezler listesinde veya zaten seenPlayers listesinde!");
+                    Debug.Log($"{playerName} is already in sobelenemezler list or seenPlayers list!");
                 }
             }
         }
         else
         {
-            Debug.Log("Tıklanan nesnede Photon.Realtime.Player scripti yok.");
+            Debug.Log("Photon.Realtime.Player script not found.");
         }
     }
 
@@ -63,7 +60,7 @@ public class PlayerInteractable : MonoBehaviour
     [PunRPC]
     public void ShowNotificationOnAllClients(string notificationMessage)
     {
-        Debug.Log($"Bildirim Gönderildi: {notificationMessage}");
+        Debug.Log($"Notification sent: {notificationMessage}");
 
         // Bildirimi tüm oyunculara göster (örneğin UI ile)
         GameManager.Instance.notificationList.Add(notificationMessage);

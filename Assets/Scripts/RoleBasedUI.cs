@@ -1,14 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
 public class RoleBasedUI : MonoBehaviour
 {
-    public GameObject blackScreen; // Siyah ekran için GameObject
-    public TMP_Text countdownText; // Geri sayım metni
-    
+    public GameObject blackScreen;
+    public TMP_Text countdownText;
     public GameTimer gameTimer;
     public PhotonView photonView;
 
@@ -82,24 +80,19 @@ public class RoleBasedUI : MonoBehaviour
 
     private IEnumerator ShowEbeScreen()
     {
-        Debug.Log("Ebe ekranı gösteriliyor.");
+        Debug.Log("Ebe Screen showing.");
 
         blackScreen.SetActive(true);
 
         for (int i = 10; i > 0; i--)
         {
-            countdownText.text = $"Ebe sensin\n{i}"; // Geri sayım
-            Debug.Log($"Geri sayım: {i}");
+            countdownText.text = $"You're the seeker!\n{i}";
+            Debug.Log($"Countdown: {i}");
             yield return new WaitForSeconds(1f);
         }
 
-        Debug.Log("Geri sayım bitti, siyah ekran kapatılıyor.");
+        Debug.Log("Countdown is over, black screen shutting down.");
         blackScreen.SetActive(false);
-        // if (gameTimer != null)
-        // {
-        //     // Ebe ekranında gameTimer başlatılıyor
-        //     gameTimer.StartTimer();  
-        // }
         countdownText.text = "";
         // Diğer oyuncular için aynı anda başlat
         photonView.RPC("StartGameTimer", RpcTarget.All);
