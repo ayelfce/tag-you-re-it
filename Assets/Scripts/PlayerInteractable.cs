@@ -27,7 +27,7 @@ public class PlayerInteractable : MonoBehaviour
             Debug.Log($"{playerName} isimli oyuncuya tıkladınız!");
 
             // Eğer tıklanan oyuncu sobelenemezler listesinde değilse ve seenPlayers listesinde değilse
-            if (!GameManager.Instance.sobelenemezler.ContainsKey(clickedPlayer) &&
+            if (!GameManager.Instance.sobelenemezler.Contains(clickedPlayer) &&
                 !GameManager.Instance.seenPlayers.Contains(clickedPlayer))
             {
                 // Hiding rolünde olduğu kontrolü

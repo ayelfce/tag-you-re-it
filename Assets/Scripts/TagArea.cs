@@ -31,40 +31,34 @@ public class TagArea : MonoBehaviourPunCallbacks
                         {
                             if (player != null && player != otherPhotonView.Owner)
                             {
-                                // Eğer hiding rolündeki oyuncu seenPlayers listesinde ve Ebe tag area'ya giriyorsa, oyunu bitir
-                                if (GameManager.Instance.GetPlayerRole(player) == "Hiding")
-                                {
-                                    Debug.Log("Game Over: " + player.NickName + " has been tagged by EBE!");
-                                    PhotonView photonView = PhotonView.Get(GameManager.Instance);
-                                    GameManager.Instance.SetPreviousTaggedPlayer(player);
-
-
-                                    photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
-
-                                    return;
-                                }
+                                GameManager.Instance.seekedPlayers.Add(player);
                             }
                         }
+                        //photonView.RPC("EndRound", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName);
                     }
                     else
                     {
-                        List<Photon.Realtime.Player> removeList = new List<Photon.Realtime.Player>();
+                        //List<Photon.Realtime.Player> removeList = new List<Photon.Realtime.Player>();
                         Debug.Log("Ebe olmayan oyuncu alana girdi: " + otherPhotonView.Owner.NickName);
+                        GameManager.Instance.sobelenemezler.Add(otherPhotonView.Owner);
+                        
+                        Debug.Log("SOBE, artık sobelenemez: " + otherPhotonView.Owner.NickName);
+                        GameManager.Instance.notificationList.Add($"SOBE, artık sobelenemez:  + {otherPhotonView.Owner.NickName}");
 
-                        foreach (Photon.Realtime.Player player in GameManager.Instance.seenPlayers)
-                        {
-                            object playerRoleForSeenPlayer;
-                            if (player.CustomProperties.TryGetValue("Role", out playerRoleForSeenPlayer))
-                            {
-                                if (playerRoleForSeenPlayer.ToString() != EBE_ROLE && !GetSobelenemezProperty(player))
-                                {
-                                    removeList.Add(player);
-                                    GameManager.Instance.seekedPlayers.Add(player);
-                                    GameManager.Instance.notificationList.Add($"{player.NickName} is seeked.");
-                                    SetSobelenemezProperty(player, true);
-                                }
-                            }
-                        }
+                        //foreach (Photon.Realtime.Player player in GameManager.Instance.seenPlayers)
+                        //{
+                        //    object playerRoleForSeenPlayer;
+                        //    if (player.CustomProperties.TryGetValue("Role", out playerRoleForSeenPlayer))
+                        //    {
+                        //        if (playerRoleForSeenPlayer.ToString() != EBE_ROLE && !GetSobelenemezProperty(player))
+                        //        {
+                        //            removeList.Add(player);
+                        //            GameManager.Instance.seekedPlayers.Add(player);
+                        //            GameManager.Instance.notificationList.Add($"{player.NickName} is seeked.");
+                        //            SetSobelenemezProperty(player, true);
+                        //        }
+                        //    }
+                        //}
                     }
                 }
                 else

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private const string EBE = "EBE";
     private const string HIDING = "Hiding";
     private Photon.Realtime.Player previousTaggedPlayer = null; // Bir önceki turda taglenen kişi
-    public Dictionary<Photon.Realtime.Player, bool> sobelenemezler = new Dictionary<Photon.Realtime.Player, bool>();
+    public List<Photon.Realtime.Player> sobelenemezler = new List<Photon.Realtime.Player>();
     public List<Photon.Realtime.Player> seenPlayers = new List<Photon.Realtime.Player>();
     public List<Photon.Realtime.Player> seekedPlayers = new List<Photon.Realtime.Player>();
     public List<string> notificationList = new List<string>();
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         if (sobelenemezler == null)
         {
-            sobelenemezler = new Dictionary<Photon.Realtime.Player, bool>();
+            sobelenemezler = new List<Photon.Realtime.Player>();
         }
 
         if (PhotonNetwork.IsMasterClient)
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (GetPlayerRole(player) == EBE)
             {
-                sobelenemezler[player] = true;
+                sobelenemezler.Add(player);
                 Debug.Log($"{player.NickName} added to sobelenemezler.");
             }
         }
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (seekedPlayers.Count != 0 && !tourEnd)
         {
-            notificationList.Add($"{seekedPlayers[0].NickName} is SEEKER");
+            notificationList.Add($"Game Over: {seekedPlayers[0].NickName} is SEEKER");
             tourEnd = true;
             PhotonView photonView = PhotonView.Get(this);
             photonView.RPC("EndRound", RpcTarget.All);
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         List<Photon.Realtime.Player> removee = new List<Photon.Realtime.Player>();
         foreach (Photon.Realtime.Player player in seenPlayers)
         {
-            if (sobelenemezler.ContainsKey(player) && sobelenemezler[player])
+            if (sobelenemezler.Contains(player))
             {
                 removee.Add(player);
             }
@@ -246,7 +246,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (GetPlayerRole(player) == EBE)
             {
-                sobelenemezler[player] = true;
+                sobelenemezler.Add(player);
                 Debug.Log($"{player.NickName} added to sobelenemezler.");
             }
         }
