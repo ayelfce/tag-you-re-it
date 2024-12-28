@@ -130,7 +130,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (tourEnd)
         {
             Debug.Log("Tour Ends");
-            photonView.RPC("EndRoundS", RpcTarget.All);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "NewEbe", ebemiz.NickName } });
+            StartCoroutine(CheckCustomPropertiesAndProceed());
+            
 
         }
 
@@ -239,17 +241,44 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    private IEnumerator CheckCustomPropertiesAndProceed()
+    {
+        yield return new WaitForSeconds(2f); // 2 saniye bekle
+
+        // "NewEbe" özelliği her oyuncuya ulaştı mı kontrol et
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("NewEbe", out object ebeNick))
+        {
+            Debug.Log("NewEbe property has been distributed successfully.");
+            photonView.RPC("EndRoundS", RpcTarget.All);
+        }
+        else
+        {
+            Debug.LogWarning("NewEbe property was not distributed to all players in time.");
+        }
+    }
+
+
     [PunRPC]
     public void EndRoundS()
     {
         Debug.Log("End Round Came");
-        // Bir önceki ebe olarak taglenen oyuncuyu kaydet
-        SceneManager.LoadScene("EndRoundScreen");
-        EndRoundScreen.Instance.ebemiss = ebemiz;
+
+        //PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "NewEbe", ebemiz.NickName } });
 
         // Yeni sahneye geçiş
-        
+        SceneManager.LoadScene("EndRoundScreen");
     }
+
+    //public void EndRoundS()
+    //{
+    //    Debug.Log("End Round Came");
+    //    // Bir önceki ebe olarak taglenen oyuncuyu kaydet
+    //    SceneManager.LoadScene("EndRoundScreen");
+    //    //EndRoundScreen.Instance.ebemiss = ebemiz;
+
+    //    // Yeni sahneye geçiş
+        
+    //}
 
     //public void EndRound(string taggedPlayerName)
     //{

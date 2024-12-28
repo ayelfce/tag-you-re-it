@@ -7,14 +7,30 @@ public class EndRoundScreen : MonoBehaviour
 {
     public static EndRoundScreen Instance { get; private set; }
     public TextMeshProUGUI previousTaggedPlayerText;
-    public Photon.Realtime.Player ebemiss;
+    public Photon.Realtime.Player ebemiss1, ebemiss;
 
     // Start() veya uygun bir metodda RPC çağrısını tetikleyebilirsiniz
     void Start()
     {
-        ebemiss  = GameManager.Instance.ebemiz;
+        //PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "NewEbe", GameManager.Instance.ebemiz.NickName } });
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("NewEbe", out object ebeNick))
+        {
+            foreach(Photon.Realtime.Player ebe in GameManager.Instance.allPlayers)
+            {
+                if(ebe.NickName == (string)ebeNick)
+                {
+                    ebemiss = ebe;
+                    Debug.Log($"Ebemiz: {ebemiss.NickName}");
+                }
+            } // Tür dönüşümünü yapın
+        }
+        else
+        {
+            Debug.Log("NewEbe not found in room properties.");
+        }
+
         // GameManager'dan önceki tagger'ı al
-        Photon.Realtime.Player previousTagger = GameManager.Instance.GetPreviousTaggedPlayer();
+        //Photon.Realtime.Player previousTagger = GameManager.Instance.GetPreviousTaggedPlayer();
 
         if (ebemiss != null)
         {
@@ -60,4 +76,5 @@ public class EndRoundScreen : MonoBehaviour
         Debug.Log("Starting new game with random tagger: " + randomTagger.NickName);
         // Burada rastgele yeni ebe atanacak
     }
+
 }
