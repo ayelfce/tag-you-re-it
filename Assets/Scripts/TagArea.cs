@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using ExitGames.Client.Photon;
 
 public class TagArea : MonoBehaviourPunCallbacks
 {
@@ -74,6 +75,19 @@ public class TagArea : MonoBehaviourPunCallbacks
         Collider collider = GetComponent<Collider>();
         collider.isTrigger = true;
         Debug.Log("20 saniye sonra isTrigger özelliği: " + collider.isTrigger);
+        foreach (Photon.Realtime.Player item in GameManager.Instance.remainers)
+        {
+            if(GameManager.Instance.GetPlayerRole(item) == "EBE")
+            {
+                GameManager.Instance.remainers.Remove(item);
+            }
+            
+        }
+        Debug.Log("Remainers from 20sc");
+        foreach (Photon.Realtime.Player item in GameManager.Instance.remainers)
+        {
+            Debug.Log($"Remainer: {item.NickName}");
+        }
     }
 
     public bool GetSobelenemezProperty(Photon.Realtime.Player player)

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using ExitGames.Client.Photon.StructWrapping;
 using Unity.VisualScripting;
+using ExitGames.Client.Photon;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -51,6 +52,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        allPlayers = PhotonNetwork.PlayerList;
+        remainers.Clear();
+        foreach (Photon.Realtime.Player p in allPlayers)
+        {
+            Debug.Log("Oyuncu remainerse eklendi: " + p.NickName);
+            remainers.Add(p);
+        }
+
         if (notificationList == null)
         {
             notificationList = new List<string>();
@@ -76,16 +85,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             AssignRoles();
         }
 
-        allPlayers = PhotonNetwork.PlayerList;
-        remainers.Clear();
-        foreach (Photon.Realtime.Player p in allPlayers)
-        {
-            Debug.Log("Oyuncu: " + p.NickName);
-            if (GetPlayerRole(p) != EBE)
-            {
-                remainers.Add(p);
-            }
-        }
+        
+        
 
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
@@ -302,7 +303,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                 if (players[i] == previousTaggedPlayer)
                 {
                     ebeIndex = i;
-                    break;
                 }
             }
         }
@@ -325,15 +325,16 @@ public class GameManager : MonoBehaviourPunCallbacks
                 players[i].SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", HIDING } });
             }
         }
-
+        Debug.Log("1");
         // Güncellenen sobelenemez listesi
         sobelenemezler.Clear();
-        foreach (Photon.Realtime.Player player in players)
+        foreach (Photon.Realtime.Player playeri in players)
         {
-            if (GetPlayerRole(player) == EBE)
+            Debug.Log("0");
+            if (GetPlayerRole(playeri) == EBE)
             {
-                sobelenemezler.Add(player);
-                Debug.Log($"{player.NickName} added to sobelenemezler.");
+                sobelenemezler.Add(playeri);
+                Debug.Log($"{playeri.NickName} added to sobelenemezler.");
             }
         }
     }
