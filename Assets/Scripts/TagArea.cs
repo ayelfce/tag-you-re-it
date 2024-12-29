@@ -51,7 +51,8 @@ public class TagArea : MonoBehaviourPunCallbacks
                             GameManager.Instance.sobelenemezler.Add(otherPhotonView.Owner);
                             Debug.Log(otherPhotonView.Owner.NickName + ": Tag, you're it!");
                             GameManager.Instance.remainers.Remove(otherPhotonView.Owner);
-                            GameManager.Instance.notificationList.Add($"{otherPhotonView.Owner.NickName}: Tag, you're it!");
+                            photonView.RPC("ShowNotificationOnAllClients", RpcTarget.All, $"{otherPhotonView.Owner.NickName}: TAG!! I won't be It!");
+                            //GameManager.Instance.notificationList.Add($"{otherPhotonView.Owner.NickName}: TAG!! I won't be It!");
                         }
                     }
                 }

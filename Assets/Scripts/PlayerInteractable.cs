@@ -41,7 +41,7 @@ public class PlayerInteractable : MonoBehaviour
 
                         // Bu bildirimi tüm oyunculara gönder
                         PhotonView photonView = PhotonView.Get(this);
-                        photonView.RPC("ShowNotificationOnAllClients", RpcTarget.All, $"{playerName} is seen!!!");
+                        photonView.RPC("ShowNotificationOnAllClients", RpcTarget.All, $"IT: I see you {playerName}!!!");
                     }
                 }
                 else
