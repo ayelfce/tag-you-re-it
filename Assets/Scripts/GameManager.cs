@@ -96,7 +96,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         if (seekedPlayers.Count != 0 && !tourEnd)
         {
-            notificationList.Add($"Game Over: {seekedPlayers[0].NickName} is SEEKER");
+            PhotonView photonView = PhotonView.Get(this);
+            photonView.RPC("ShowNotificationOnAllClients", RpcTarget.All, $"Game Over: {seekedPlayers[0].NickName} is SEEKER");
             ebemiz = seekedPlayers[0];
             tourEnd = true;
         }
@@ -262,6 +263,15 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Debug.LogWarning("Seen list is null, reset unsuccessful.");
         }
+    }
+
+    [PunRPC]
+    public void ShowNotificationOnAllClients(string notificationMessage)
+    {
+        Debug.Log($"Notification sent: {notificationMessage}");
+
+        // Bildirimi tüm oyunculara göster (örneğin UI ile)
+        GameManager.Instance.notificationList.Add(notificationMessage);
     }
 
 }

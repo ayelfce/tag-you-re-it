@@ -53,7 +53,7 @@ public class GameTimer : MonoBehaviour
     [PunRPC]
     public void ResetTimer()
     {
-        timeLeft = 120f; // Başlangıç zamanına sıfırlar
+        timeLeft = 135f; // Başlangıç zamanına sıfırlar
         Debug.Log("Timer reset.");
     }
 }
