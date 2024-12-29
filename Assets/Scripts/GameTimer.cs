@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameTimer : MonoBehaviour
 {
     public TextMeshProUGUI countdownText;
-    public float timeLeft = 120f;
+    public float timeLeft = 135f;
     private bool timerIsRunning = false;
 
     [PunRPC]

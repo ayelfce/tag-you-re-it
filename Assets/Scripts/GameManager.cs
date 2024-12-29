@@ -256,11 +256,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (seenPlayers != null)
         {
             seenPlayers.Clear();
-            Debug.Log("Görülen oyuncu listesi sıfırlandı.");
+            Debug.Log("Seen list reset.");
         }
         else
         {
-            Debug.LogWarning("Görülen oyuncu listesi null, sıfırlama başarısız.");
+            Debug.LogWarning("Seen list is null, reset unsuccessful.");
         }
     }
 

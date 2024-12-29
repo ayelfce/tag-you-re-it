@@ -84,9 +84,9 @@ public class RoleBasedUI : MonoBehaviour
 
         blackScreen.SetActive(true);
 
-        for (int i = 10; i > 0; i--)
+        for (int i = 15; i > 0; i--)
         {
-            countdownText.text = $"You're the seeker!\n{i}";
+            countdownText.text = $"You're the SEEKER!\n{i}";
             Debug.Log($"Countdown: {i}");
             yield return new WaitForSeconds(1f);
         }
