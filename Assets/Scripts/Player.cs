@@ -5,6 +5,7 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
+    [SerializeField] private AudioSource footStep;
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private float gravity = -9.81f;
@@ -59,10 +60,11 @@ public class Player : MonoBehaviour
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
         // Eğer hareket varsa isWalking'i güncelle
-        isWalking = direction.magnitude >= 0.1f;
+        isWalking = direction.magnitude >= 0.001f;
 
         if (isWalking)
         {
+            footStep.enabled = true;
             // Kameraya göre hedef açıyı hesapla
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -73,6 +75,10 @@ public class Player : MonoBehaviour
             // Hareket yönü
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+        }
+        else 
+        {
+            footStep.enabled = false;
         }
 
         // Yerçekimi

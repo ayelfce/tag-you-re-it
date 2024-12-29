@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class EndRoundScreen : MonoBehaviourPun
 {
     public static EndRoundScreen Instance { get; private set; }
-    public TextMeshProUGUI previousTaggedPlayerText;
+    [SerializeField] private TextMeshProUGUI previousTaggedPlayerText;
     public Photon.Realtime.Player ebemiss;
 
-    void Start()
+    private void Start()
     {
         // "NewEbe" bilgisi odadan alınır
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("NewEbe", out object ebeNick))

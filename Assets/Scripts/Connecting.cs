@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Connecting : MonoBehaviourPunCallbacks
 {
-    void Start()
+    private void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
     }
