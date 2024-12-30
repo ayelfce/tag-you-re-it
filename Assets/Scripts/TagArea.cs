@@ -51,7 +51,7 @@ public class TagArea : MonoBehaviourPunCallbacks
                             GameManager.Instance.sobelenemezler.Add(otherPhotonView.Owner);
                             Debug.Log(otherPhotonView.Owner.NickName + ": Tag, you're it!");
                             GameManager.Instance.remainers.Remove(otherPhotonView.Owner);
-                            photonView.RPC("ShowNotificationOnAllClients", RpcTarget.All, $"{otherPhotonView.Owner.NickName}: TAG!! I won't be It!");
+                            //photonView.RPC("ShowNotificationOnAllClients", RpcTarget.All, $"{otherPhotonView.Owner.NickName}: TAG!! I won't be It!");
                             //GameManager.Instance.notificationList.Add($"{otherPhotonView.Owner.NickName}: TAG!! I won't be It!");
                         }
                     }
@@ -106,5 +106,14 @@ public class TagArea : MonoBehaviourPunCallbacks
     public void OnEbeEnter(Photon.Realtime.Player player)
     {
         Debug.Log($"{player.NickName} is EBE, players tagged!");
+    }
+
+    [PunRPC]
+    public void ShowNotificationOnAllClients(string notificationMessage)
+    {
+        Debug.Log($"Notification sent: {notificationMessage}");
+
+        // Bildirimi tüm oyunculara göster (örneğin UI ile)
+        GameManager.Instance.notificationList.Add(notificationMessage);
     }
 }

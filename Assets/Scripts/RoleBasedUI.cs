@@ -1,5 +1,6 @@
 using System.Collections;
 using Photon.Pun;
+using Photon.Pun.Demo.PunBasics;
 using TMPro;
 using UnityEngine;
 
@@ -60,6 +61,16 @@ public class RoleBasedUI : MonoBehaviour
         {
             Debug.LogWarning("Role still not assigned.");
         }
+
+        foreach (Photon.Realtime.Player player in GameManager.Instance.allPlayers)
+            {
+                object playerRol;
+                player.CustomProperties.TryGetValue("Role", out playerRol);
+                if (playerRol.ToString() == "EBE")
+                {
+                    photonView.RPC("ShowNotificationOnAllClients", RpcTarget.All, $"SEEKER of this round: {player.NickName}");
+                }
+            }
     }
 
     private void HandleRole(object role)
@@ -105,5 +116,14 @@ public class RoleBasedUI : MonoBehaviour
         {
             gameTimer.StartTimer();  // Tüm oyuncular için gameTimer'ı başlat
         }
+    }
+
+    [PunRPC]
+    public void ShowNotificationOnAllClients(string notificationMessage)
+    {
+        Debug.Log($"Notification sent: {notificationMessage}");
+
+        // Bildirimi tüm oyunculara göster (örneğin UI ile)
+        GameManager.Instance.notificationList.Add(notificationMessage);
     }
 }
